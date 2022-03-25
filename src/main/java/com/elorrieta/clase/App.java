@@ -28,7 +28,7 @@ public class App {
 
 		System.out.println("Comenzamos");
 		boolean flag = true;
-
+			
 		do {
 
 			opcion = menu();
@@ -78,7 +78,7 @@ public class App {
 			  ResultSet rs = pst.executeQuery();
 				
 			) { 
-						
+			System.out.println("hola a todos");			
 			System.out.println("-------------------------------------------------------");
 			System.out.println(" ID            nombre            email");
 			System.out.println("-------------------------------------------------------");
@@ -94,7 +94,7 @@ public class App {
 			System.out.println("---------------------- TOTAL X Alumnos -------------------");
 			//TODO pintar el toal de alumnos
 			
-			System.out.println("Este es el segundo cambio de Iñaki");
+			
 						
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -121,8 +121,6 @@ public class App {
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
-		
-		System.out.println("Este cambio lo he hecho yo, IÑAKI");
 
 		op = Integer.parseInt(sc.nextLine().trim());
 
@@ -130,8 +128,6 @@ public class App {
 		// TODO comprobar que sea un numero del 0 al 5
 
 		return op;
-		
-	
 	}// menu
 
 }// App
