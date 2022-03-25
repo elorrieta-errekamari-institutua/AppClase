@@ -21,7 +21,7 @@ public class App {
 	private static final int OPCION_ELIMINAR = 4;
 	private static final int OPCION_SALIR = 0;
 
-	public final String SQL_INSERTALUMNO = "INSERT INTO alumno VALUES (?,?,?)";
+	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
 
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
@@ -59,38 +59,32 @@ public class App {
 
 	}// main
 
-	public void insertarUsuario() throws SQLException {
-
-//		try ( Connection con = Conexion.getConnection()) {
-//
-//			PreparedStatement psc = con.prepareStatement(SQL_INSERTALUMNO);
-//			psc.setString(1, ));
-//			psc.setString(2, );
-//			psc.setString(3, );
-//			psc.executeUpdate();
-//
-//		}
-	}
-
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
 	private static void insertar() {
-//		System.out.println("TODO Insertado");
-//
-//		Connection con = Conexion.getConnection();
-//		
-//		Scanner sc = new Scanner(System.in);
-//
-//		System.out.println("Introduce el id");
-//		String nombre = sc.next();
-//		sc.getConnection();
-//		System.out.println("Introduce el nombre");
-//		String DNI = sc.next();
-//		
-//		System.out.println("Introduce el gmail");
-//		String matricula = sc.next();
-//		
+
+		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
+
+		) {
+
+			System.out.println("Introduce el nombre");
+			String nombre = sc.nextLine();
+
+			System.out.println("Introduce el gmail");
+			String email = sc.nextLine();
+
+			// TODO validar campos y capturar excepcion de email capturado
+
+			pst.setString(1, nombre);
+			pst.setString(2, email);
+
+			pst.executeUpdate();
+			System.out.println("Alumno insertado");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}// insertar
 
