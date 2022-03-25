@@ -3,9 +3,8 @@ package com.elorrieta.clase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
-
-// ANDER cambio tonto
 
 /**
  * App para hacer un CRUD completo para la bbdd de clase.sql
@@ -21,6 +20,8 @@ public class App {
 	private static final int OPCION_MODIFICAR = 3;
 	private static final int OPCION_ELIMINAR = 4;
 	private static final int OPCION_SALIR = 0;
+	
+	public final String SQL_INSERTALUMNO = "INSERT INTO alumno VALUES (?,?,?)";
 
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
@@ -30,7 +31,7 @@ public class App {
 
 		System.out.println("Comenzamos");
 		boolean flag = true;
-			
+
 		do {
 
 			opcion = menu();
@@ -57,14 +58,40 @@ public class App {
 		System.out.println("Terminamos");
 
 	}// main
+	
+	
+	public void insertarUsuario() throws SQLException {
 
+//		try ( Connection con = Conexion.getConnection()) {
+//
+//			PreparedStatement psc = con.prepareStatement(SQL_INSERTALUMNO);
+//			psc.setString(1, ));
+//			psc.setString(2, );
+//			psc.setString(3, );
+//			psc.executeUpdate();
+//
+//		}
+	}
+	
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
 	private static void insertar() {
-		System.out.println("TODO Insertado");
-
-		Connection con = Conexion.getConnection();
+//		System.out.println("TODO Insertado");
+//
+//		Connection con = Conexion.getConnection();
+//		
+//		Scanner sc = new Scanner(System.in);
+//
+//		System.out.println("Introduce el id");
+//		String nombre = sc.next();
+//		sc.getConnection();
+//		System.out.println("Introduce el nombre");
+//		String DNI = sc.next();
+//		
+//		System.out.println("Introduce el gmail");
+//		String matricula = sc.next();
+//		
 
 	}// insertar
 
@@ -80,7 +107,7 @@ public class App {
 			  ResultSet rs = pst.executeQuery();
 				
 			) { 
-			System.out.println("hola a todos");			
+						
 			System.out.println("-------------------------------------------------------");
 			System.out.println(" ID            nombre            email");
 			System.out.println("-------------------------------------------------------");
@@ -131,5 +158,7 @@ public class App {
 
 		return op;
 	}// menu
+	
+	
 
 }// App
