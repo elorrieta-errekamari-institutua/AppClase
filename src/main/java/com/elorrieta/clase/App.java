@@ -20,7 +20,7 @@ public class App {
 	private static final int OPCION_MODIFICAR = 3;
 	private static final int OPCION_ELIMINAR = 4;
 	private static final int OPCION_SALIR = 0;
-	
+
 	public final String SQL_INSERTALUMNO = "INSERT INTO alumno VALUES (?,?,?)";
 
 	private static int opcion = 0; // opcion seleccionada por el usuario
@@ -58,8 +58,7 @@ public class App {
 		System.out.println("Terminamos");
 
 	}// main
-	
-	
+
 	public void insertarUsuario() throws SQLException {
 
 //		try ( Connection con = Conexion.getConnection()) {
@@ -72,7 +71,7 @@ public class App {
 //
 //		}
 	}
-	
+
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
@@ -121,19 +120,8 @@ public class App {
 			} // while
 
 			System.out.println("---------------------- TOTAL X Alumnos -------------------");
-<<<<<<< HEAD
-			// TODO pintar el toal de alumnos
-
-			System.out.println("Este es el segundo cambio de Iñaki");
 
 		} catch (Exception e) {
-=======
-			//TODO pintar el toal de alumnos
-			
-			
-						
-		}catch (Exception e) {
->>>>>>> branch 'master' of https://github.com/elorrieta-errekamari-institutua/AppClase.git
 			e.printStackTrace();
 		}
 
@@ -148,6 +136,7 @@ public class App {
 	private static int menu() {
 		int op = 0;
 		boolean error = false;
+
 		System.out.println("----------------------------------------------------");
 		System.out.println("-----   APP GESTION CLASE        -------------------");
 		System.out.println("----------------------------------------------------");
@@ -160,29 +149,19 @@ public class App {
 		System.out.println("----------------------------------------------------");
 
 		do {
-
 			try {
 				op = Integer.parseInt(sc.nextLine().trim());
-				
 				if (opcion < 0 && opcion > 4) {
 					error = true;
 					System.out.println("Debe introducir un numero del 0 al 4");
 				}
-
 			} catch (Exception e) {
 				error = true;
 				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
 				e.printStackTrace();
 			}
-
 		} while (error);
 		return op;
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/elorrieta-errekamari-institutua/AppClase.git
-	}// menu
-	
-	
+	}
 
 }// App
