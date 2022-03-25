@@ -74,13 +74,13 @@ public class App {
 	private static void listar() {
 
 		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno DESC;";
-		
-		try ( Connection con = Conexion.getConnection();
-			  PreparedStatement pst = con.prepareStatement(sql);
-			  ResultSet rs = pst.executeQuery();
-				
-			) { 
-						
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+
+		) {
+
 			System.out.println("-------------------------------------------------------");
 			System.out.println(" ID            nombre            email");
 			System.out.println("-------------------------------------------------------");
@@ -89,16 +89,16 @@ public class App {
 				int id = rs.getInt("id_alumno");
 				String nombre = rs.getString("nombre");
 				String email = rs.getString("email");
-				System.out.printf(" %-4s %-25s %s \n", id , nombre, email);			
-			
+				System.out.printf(" %-4s %-25s %s \n", id, nombre, email);
+
 			} // while
 
 			System.out.println("---------------------- TOTAL X Alumnos -------------------");
-			//TODO pintar el toal de alumnos
-			
+			// TODO pintar el toal de alumnos
+
 			System.out.println("Este es el segundo cambio de Iñaki");
-						
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -112,7 +112,7 @@ public class App {
 	 */
 	private static int menu() {
 		int op = 0;
-
+		boolean error = false;
 		System.out.println("----------------------------------------------------");
 		System.out.println("-----   APP GESTION CLASE        -------------------");
 		System.out.println("----------------------------------------------------");
@@ -123,17 +123,26 @@ public class App {
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
-		
-		System.out.println("Este cambio lo he hecho yo, IÑAKI");
 
-		op = Integer.parseInt(sc.nextLine().trim());
+		do {
 
-		// TODO gestionar la Excepcion si me mete letras
-		// TODO comprobar que sea un numero del 0 al 5
+			try {
+				op = Integer.parseInt(sc.nextLine().trim());
+				
+				if (opcion < 0 && opcion > 4) {
+					error = true;
+					System.out.println("Debe introducir un numero del 0 al 4");
+				}
 
+			} catch (Exception e) {
+				error = true;
+				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
+				e.printStackTrace();
+			}
+
+		} while (error);
 		return op;
-		
-	
+
 	}// menu
 
 }// App
