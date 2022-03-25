@@ -96,7 +96,7 @@ public class App {
 			System.out.println("---------------------- TOTAL X Alumnos -------------------");
 			//TODO pintar el toal de alumnos
 			
-			
+			System.out.println("Este es el segundo cambio de Iñaki");
 						
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -132,6 +132,8 @@ public class App {
 		// TODO comprobar que sea un numero del 0 al 5
 
 		return op;
+		
+	
 	}// menu
 
 }// App
