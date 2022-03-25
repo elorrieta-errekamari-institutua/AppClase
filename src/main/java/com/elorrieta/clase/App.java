@@ -121,6 +121,8 @@ public class App {
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
+		
+		System.out.println("Este cambio lo he hecho yo, IÑAKI");
 
 		op = Integer.parseInt(sc.nextLine().trim());
 
