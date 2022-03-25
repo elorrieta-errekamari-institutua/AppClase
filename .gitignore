@@ -1,1 +1,6 @@
+#ficheros y carpetas que ignoramos de eclipse
 /target/
+/.settings/
+.classpath
+.project
+
