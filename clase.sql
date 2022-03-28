@@ -37,7 +37,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
-INSERT INTO `alumno` VALUES (1,'Brandon','brandon@email.com'),(2,'Ibai','ibai.@email.com'),(3,'Jon Ander','jonander@'),(4,'IbonModificado','ibonmodif@email.com'),(5,'ion','ion.clerenciaca@elorrieta-errekamari.com'),(6,'denis','denis.cunadome@elorrieta-errekamari.com'),(7,'andres','andres@email.com'),(8,'javier','javier@javier.com'),(9,'Oier','oier.gagoir@elorrieta-errekamari.com');
+INSERT INTO `alumno` VALUES (1,'Brandon','brandon@email.com'),(2,'Ibai','ibai.@email.com'),(3,'Jon Ander','jonander@'),(4,'IbonModificado','ibonmodif@email.com'),(5,'ion','ion.@emaul.com'),(6,'denis','denis.cado@emaul.com'),(7,'andres','andres@email.com'),(8,'javier','javier@javier.com'),(9,'Oier','oieragoi@emaul.com');
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
