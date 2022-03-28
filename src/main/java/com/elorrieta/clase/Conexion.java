@@ -16,7 +16,7 @@ public class Conexion {
 		
 		Connection con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clase?useSSL=false", "root", "root");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clase2?useSSL=false", "root", "root");
 		} catch (SQLException e) {
 			System.out.println("ERROR de conexion");
 			e.printStackTrace();
