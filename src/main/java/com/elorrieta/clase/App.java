@@ -2,8 +2,6 @@ package com.elorrieta.clase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -38,7 +36,7 @@ public class App {
 
 			switch (opcion) {
 			case OPCION_LISTAR:
-				listar();
+				new Select().listar();
 				break;
 
 			case OPCION_INSERTAR:
@@ -88,39 +86,7 @@ public class App {
 
 	}// insertar
 
-	/**
-	 * Muestra todos los alumnos por pantalla
-	 */
-	private static void listar() {
-
-		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno ASC;";
-
-		try (Connection con = Conexion.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql);
-				ResultSet rs = pst.executeQuery();
-
-		) {
-
-			System.out.println("-------------------------------------------------------");
-			System.out.println(" ID            nombre            email");
-			System.out.println("-------------------------------------------------------");
-			while (rs.next()) {
-
-				int id = rs.getInt("id_alumno");
-				String nombre = rs.getString("nombre");
-				String email = rs.getString("email");
-				System.out.printf(" %-4s %-25s %s \n", id, nombre, email);
-
-			} // while
-
-			System.out.println("---------------------- TOTAL X Alumnos -------------------");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}// listar
-
+	
 	/**
 	 * Pinta por pantalla el menu de la App y pide al usuario que seleccione una
 	 * opcion
