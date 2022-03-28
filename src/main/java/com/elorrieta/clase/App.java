@@ -93,7 +93,7 @@ public class App {
 	 */
 	private static void listar() {
 
-		String sql = "SELECT id_alumno, nombre, email FROM clase2.alumno ORDER BY id_alumno DESC;";
+		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno ASC;";
 
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
