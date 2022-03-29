@@ -28,12 +28,56 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		login();
+
+	}// main
+
+	/**
+	 * comprobando datos de la bbdd para logearte
+	 */
+	private static void login() {
+
+		int id;
+		String nombre;
+
+		System.out.println("Ingresa el ID");
+		id = Integer.parseInt(sc.nextLine().trim());
+		System.out.println("Ingresa el nombre");
+		nombre = sc.nextLine();
+		if (getUnAlumno(id, nombre)) {
+			System.out.println("BIENVENIDO");
+			switchMenu();
+		}
+	}
+
+	private static  boolean getUnAlumno(int idAl, String nombreAl) {
+		boolean encontrado = false;
+		String sql = "SELECT id_alumno, nombre FROM clase.alumno;";
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+		) {
+
+			while (rs.next()) {
+				if (rs.getInt(1) == idAl && rs.getString(2).equalsIgnoreCase(nombreAl)) {
+					encontrado = true;
+				}
+			}
+			//TODO falta repetir mientras no sea correcto
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return encontrado;
+	}
+
+	public static void switchMenu() {
 
 		System.out.println("Comenzamos");
 		boolean flag = true;
 
 		do {
-
 			opcion = menu();
 
 			switch (opcion) {
@@ -56,8 +100,7 @@ public class App {
 		} while (flag);
 
 		System.out.println("Terminamos");
-
-	}// main
+	}
 
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
@@ -91,6 +134,7 @@ public class App {
 	/**
 	 * Muestra todos los alumnos por pantalla
 	 */
+
 	private static void listar() {
 
 		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno DESC;";
