@@ -78,7 +78,7 @@ public class App {
 		case 4: System.out.println("Sin terminar!!!!!!!!!!!");
 			new Delete().borrarAlumno();
 			break;
-		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero");
+		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero" + opcion);
 			opcion = 99;
 		}
 	}	
