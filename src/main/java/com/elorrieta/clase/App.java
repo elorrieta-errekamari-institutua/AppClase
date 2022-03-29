@@ -58,7 +58,7 @@ public class App {
 	 * 
 	 * @return int opcion seleccionada por el usuario;
 	 */
-	private static int menu() {
+	private int menu() {
 		int op = 0;
 		boolean error = false;
 
@@ -125,7 +125,7 @@ public class App {
 		
 		
 		
-	//}
+
 	
 	
 	
