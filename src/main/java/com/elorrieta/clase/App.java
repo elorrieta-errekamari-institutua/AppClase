@@ -42,6 +42,10 @@ public class App {
 			case OPCION_INSERTAR:
 				insertar();
 				break;
+				
+			case OPCION_MODIFICAR:
+				new Update().modificar();
+				break;
 
 			case OPCION_SALIR:
 				flag = false;
@@ -102,7 +106,7 @@ public class App {
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 1 - Listar Alumnos");
 		System.out.println(" 2 - Insertar Nuevo Alumno");
-		System.out.println(" 3 - sdasdasdasd");
+		System.out.println(" 3 - Modificar Alumno Existente");
 		System.out.println(" 4 - asdasdasdasd ");
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
