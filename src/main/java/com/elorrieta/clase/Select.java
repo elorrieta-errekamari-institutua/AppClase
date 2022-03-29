@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 
 public class Select {
 
+	/**
+	 * Lista los alumnos de la bbdd clase
+	 */
 	public void listar() {
 
 		int i = 0;
@@ -17,20 +20,20 @@ public class Select {
 
 		) {
 
-			System.out.println("-------------------------------------------------------");
-			System.out.println(" ID            nombre            email");
-			System.out.println("-------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------------------");
+			System.out.println(" ID        nombre                email");
+			System.out.println("-------------------------------------------------------------------------------");
 			while (rs.next()) {
 
 				int id = rs.getInt("id_alumno");
 				String nombre = rs.getString("nombre");
 				String email = rs.getString("email");
-				System.out.printf(" %-10s %-25s %-30s \n", id, nombre, email);
+				System.out.printf(" %-10s %-17s %5s \n", id, nombre, email);
 
 				i++;
 			} // while
 
-			System.out.println("---------------------- TOTAL " + i + " Alumnos -------------------");
+			System.out.println("\n+---------------------- TOTAL " + i + " Alumnos -------------------+\n\n");
 
 		} catch (Exception e) {
 			e.printStackTrace();

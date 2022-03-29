@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Insert {
 
+	/**
+	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
+	 */
 	public static void insertar() {
 
 		Scanner sc = new Scanner(System.in);
