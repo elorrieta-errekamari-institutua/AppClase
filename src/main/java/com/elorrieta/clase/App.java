@@ -12,12 +12,7 @@ import java.util.Scanner;
  */
 public class App {
 
-	// variables globales para poder usar en todos los metodos de esta Clase
-	private static final int OPCION_LISTAR = 1;
-	private static final int OPCION_INSERTAR = 2;
-	private static final int OPCION_MODIFICAR = 3;
-	private static final int OPCION_ELIMINAR = 4;
-	private static final int OPCION_SALIR = 0;
+
 
 	static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
 
@@ -27,9 +22,6 @@ public class App {
 
 
 
-	/**
-	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
-	 */
 
 
 	
