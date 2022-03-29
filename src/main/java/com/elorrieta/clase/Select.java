@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 
 public class Select {
 
-	
 	public void listar() {
 
+		int i = 0;
 		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno ASC;";
 
 		try (Connection con = Conexion.getConnection();
@@ -25,18 +25,17 @@ public class Select {
 				int id = rs.getInt("id_alumno");
 				String nombre = rs.getString("nombre");
 				String email = rs.getString("email");
-				System.out.printf(" %-4s %-25s %s \n", id, nombre, email);
+				System.out.printf(" %-10s %-25s %-30s \n", id, nombre, email);
 
+				i++;
 			} // while
 
-			System.out.println("---------------------- TOTAL X Alumnos -------------------");
+			System.out.println("---------------------- TOTAL " + i + " Alumnos -------------------");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-	}// listar
+	}
 
-	
-	
 }
