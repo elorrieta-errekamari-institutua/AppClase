@@ -4,6 +4,7 @@ Lorem **negrita** sit *italica*, consectetur adipiscing elit. In mattis nisi nec
 
 ![pantallazo menu de la App](/screenshots/menu.PNG)
 
+<<<<<<< Upstream, based on origin/andres-maria
 
 Ejemplo de enlace [pulsa](https://tutorialmarkdown.com/sintaxis)
 
@@ -40,3 +41,6 @@ Lorem ipsum dolor sit amet
 
 
 <p> Este es un ejemplo</p>
+=======
+Proyecto mavenizado, en el pom.xml tenemos todas las librerias necesarias
+>>>>>>> 05d3669 Update README.md
