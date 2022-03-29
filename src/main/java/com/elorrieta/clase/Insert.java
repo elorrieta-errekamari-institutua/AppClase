@@ -8,8 +8,9 @@ public class Insert {
 
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
+	 * @param sc2 
 	 */
-	public static void insertar() {
+	public static void insertar(Scanner sc2) {
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -35,7 +36,6 @@ public class Insert {
 			e.printStackTrace();
 		}
 
-		sc.close();
 		
 	}// insertar
 	

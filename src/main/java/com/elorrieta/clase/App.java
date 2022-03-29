@@ -61,22 +61,22 @@ public class App {
 	
 		switch (opcion) {
 		case 0: System.out.println("¡¡¡¡Que tennga un buen dia!!!!");
-			System.exit(opcion);
+			sc.close();
 			break;
 		case 1:
 			new Select().listar();
 			break;
 
 		case 2:
-			new Insert().insertar();
+			new Insert().insertar(sc);
 			break;
 
 		case 3:System.out.println("Sin terminar !!!!!!!!!!!");
-			new Update().modificar();
+			new Update().modificar(sc);
 			break;
 			
 		case 4: System.out.println("Sin terminar!!!!!!!!!!!");
-			new Delete().borrarAlumno();
+			new Delete().borrarAlumno(sc);
 			break;
 		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero" + opcion);
 			opcion = 99;

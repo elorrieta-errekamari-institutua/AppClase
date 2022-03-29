@@ -7,13 +7,13 @@ import java.util.Scanner;
 
 public class Update {
 
-	public void modificar() {
+	public void modificar(Scanner sc) {
 
 		//declaracion de variables
 		String nombre;
 		String email;
 		int id = 0;
-		Scanner sc = new Scanner(System.in);
+		
 
 		//sentencia sql que necesitamos
 		String sql = "UPDATE alumno SET nombre = ?, email = ? WHERE id_alumno = ?;";
@@ -66,7 +66,7 @@ public class Update {
 			e.printStackTrace();
 		}
 		
-		sc.close();
+		
 
 	}
 

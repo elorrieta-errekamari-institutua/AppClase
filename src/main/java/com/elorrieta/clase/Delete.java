@@ -6,11 +6,10 @@ import java.util.Scanner;
 
 public class Delete {
 
-	public void borrarAlumno() {
+	public void borrarAlumno(Scanner sc) {
 
 		// creracion de las variables que necesitamos para recoger los datos
 		int id = 0;
-		Scanner sc = new Scanner(System.in);
 
 		// declarar la sentencia que queremos
 		String sql = "DELETE FROM alumno WHERE id_alumno = ?;";
@@ -46,7 +45,6 @@ public class Delete {
 		}
 		
 		//cerrar el teclado
-		sc.close();
 
 	}
 
