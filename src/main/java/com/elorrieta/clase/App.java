@@ -71,7 +71,7 @@ public class App {
 			new Insert().insertar();
 			break;
 
-		case 3:System.out.println("Sin terminar!!!!!!!!!!!");
+		case 3:System.out.println("Sin terminar !!!!!!!!!!!");
 			new Update().modificar();
 			break;
 			
