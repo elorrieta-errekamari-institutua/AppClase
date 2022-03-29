@@ -50,6 +50,8 @@ public class App {
 			System.out.println("BIENVENIDO");
 			switchMenu();
 		}
+		
+		// TODO hay que hacer un merge despues de completar 
 	}
 
 	private static boolean getUnAlumno(int idAl, String nombreAl) {
