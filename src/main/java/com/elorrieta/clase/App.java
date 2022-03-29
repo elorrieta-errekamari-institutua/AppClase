@@ -22,6 +22,8 @@ public class App {
 	private static final int OPCION_SALIR = 0;
 
 	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
+	private static final String SQL_DELETEALUMNO = "DELETE FROM alumno WHERE id_alumno = ?";
+	private static final String SQL_UPDATEALUMNO = "UPDATE alumno set nombre = ? , email = ? where id_alumno = ? ";
 
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
@@ -50,21 +52,20 @@ public class App {
 		}
 	}
 
-	private static  boolean getUnAlumno(int idAl, String nombreAl) {
+	private static boolean getUnAlumno(int idAl, String nombreAl) {
 		boolean encontrado = false;
 		String sql = "SELECT id_alumno, nombre FROM clase.alumno;";
 
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
-				ResultSet rs = pst.executeQuery();
-		) {
+				ResultSet rs = pst.executeQuery();) {
 
 			while (rs.next()) {
 				if (rs.getInt(1) == idAl && rs.getString(2).equalsIgnoreCase(nombreAl)) {
 					encontrado = true;
 				}
 			}
-			//TODO falta repetir mientras no sea correcto
+			// TODO falta repetir mientras no sea correcto
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -93,6 +94,13 @@ public class App {
 				flag = false;
 				break;
 
+			case OPCION_MODIFICAR:
+				modificarAlumno();
+				break;
+
+			case OPCION_ELIMINAR:
+				deleteAlumno();
+				break;
 			default:
 				break;
 			}
@@ -100,6 +108,52 @@ public class App {
 		} while (flag);
 
 		System.out.println("Terminamos");
+	}
+
+	private static void deleteAlumno() {
+		System.out.println("Escribe el ID del alumno que quieres eliminar: ");
+		int id = Integer.parseInt(sc.nextLine().trim());
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_DELETEALUMNO);) {
+			pst.setInt(1, id);
+			int lineasEliminadas = pst.executeUpdate();
+			if (lineasEliminadas > 0)
+				System.out.println(" El alumno se a eliminado correctamente ");
+			else
+				System.out.println("No se ha encontrado el alumno");
+
+		} catch (Exception e) {
+			System.out.println("No se ha encontrado el usuario que desea eliminar");
+		}
+	}
+
+	/**
+	 * Modifica un alumno por id
+	 * 
+	 */
+	private static void modificarAlumno() {
+		System.out.println("Escribe el ID del alumno que quieres Modificar: ");
+		int id = Integer.parseInt(sc.nextLine().trim());
+		System.out.println(" NOMBRE ");
+		String nombre = sc.nextLine();
+		System.out.println(" EMAIL ");
+		String email = sc.nextLine();
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_UPDATEALUMNO);) {
+			// UPDATE CLIENTE
+			pst.setString(1, nombre);
+			pst.setString(2, email);
+			pst.setInt(3, id);
+			int lineasEliminadas = pst.executeUpdate();
+			if (lineasEliminadas > 0)
+				System.out.println(" El alumno se a eliminado correctamente ");
+			else
+				System.out.println("No se ha encontrado el alumno");
+
+		} catch (Exception e) {
+			System.out.println("No se ha encontrado el usuario que desea eliminar");
+		}
 	}
 
 	/**
