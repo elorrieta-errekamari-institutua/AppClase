@@ -35,6 +35,8 @@ public class Insert {
 			e.printStackTrace();
 		}
 
+		sc.close();
+		
 	}// insertar
 	
 }
