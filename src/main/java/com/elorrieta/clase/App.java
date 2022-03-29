@@ -22,6 +22,8 @@ public class App {
 	private static final int OPCION_SALIR = 0;
 
 	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
+	private static final String SQL_DELETEALUMNO = "DELETE FROM alumno WHERE id_alumno = ?";
+	private static final String SQL_UPDATEALUMNO = "UPDATE alumno set nombre = ? , email = ? where id_alumno = ? ";
 
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
@@ -49,6 +51,12 @@ public class App {
 				flag = false;
 				break;
 
+			case OPCION_MODIFICAR:
+
+				break;
+			case OPCION_ELIMINAR:
+				deleteAlumno();
+				break;
 			default:
 				break;
 			}
@@ -83,10 +91,51 @@ public class App {
 			System.out.println("Alumno insertado");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(" El nombre del alumno o el email ya existe en la base de datos ");
 		}
 
 	}// insertar
+
+	/**
+	 * Deletea un alumno de la base de datos con el id del alumno 
+	 * 
+	 */
+	private static void deleteAlumno() {
+		System.out.println("Escribe el ID del alumno que quieres eliminar: ");
+		int id = Integer.parseInt(sc.nextLine().trim());
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_DELETEALUMNO);) {
+			pst.setInt(1, id);
+			int lineasEliminadas = pst.executeUpdate();
+			if (lineasEliminadas > 0)
+				System.out.println(" El alumno se a eliminado correctamente ");
+			else 
+				System.out.println("No se ha encontrado el alumno");
+
+		} catch (Exception e) {
+			System.out.println("No se ha encontrado el usuario que desea eliminar");
+		}
+	}
+	/**
+	 * Modifica un alumno por id
+	 * 
+	 */
+	private static void modificarAlumno() {
+		System.out.println("Escribe el ID del alumno que quieres eliminar: ");
+		int id = Integer.parseInt(sc.nextLine().trim());
+		
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_UPDATEALUMNO);) {
+		// UPDATE CLIENTE
+				
+					pst.setString(1, c.getDni());
+					pst.setString(2, c.getNombre());
+					pst.setString(3, c.getV().getMatricula());
+					pst.setString(4, c.getV().getMatricula());
+		}
+		
+	}
 
 	/**
 	 * Muestra todos los alumnos por pantalla
