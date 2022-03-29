@@ -78,19 +78,13 @@ public class App {
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
 
-		do {
-			try {
-				op = Integer.parseInt(sc.nextLine().trim());
-				if (opcion < 0 && opcion > 4) {
-					error = true;
-					System.out.println("Debe introducir un numero del 0 al 4");
-				}
-			} catch (Exception e) {
-				error = true;
-				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
-				e.printStackTrace();
-			}
-		} while (error);
+		try {
+			op = Integer.parseInt(sc.nextLine().trim());
+		}catch(Exception e) {
+			e.getMessage();
+			op=99;
+		}
+		
 		return op;
 	}
 
