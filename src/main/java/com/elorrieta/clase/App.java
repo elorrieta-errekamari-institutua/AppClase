@@ -19,42 +19,18 @@ public class App {
 	private static final int OPCION_ELIMINAR = 4;
 	private static final int OPCION_SALIR = 0;
 
-	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
+	static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
 
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
-	private static Scanner sc = new Scanner(System.in);
+	public static Scanner sc = new Scanner(System.in);
 
 
 
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
-	private static void insertar() {
 
-		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
-
-		) {
-
-			System.out.println("Introduce el nombre");
-			String nombre = sc.nextLine();
-
-			System.out.println("Introduce el gmail");
-			String email = sc.nextLine();
-
-			// TODO validar campos y capturar excepcion de email capturado
-
-			pst.setString(1, nombre);
-			pst.setString(2, email);
-
-			pst.executeUpdate();
-			System.out.println("Alumno insertado");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}// insertar
 
 	
 	/**
@@ -65,7 +41,6 @@ public class App {
 	 */
 	private static int menu() {
 		int op = 0;
-		boolean error = false;
 
 		System.out.println("----------------------------------------------------");
 		System.out.println("-----   APP GESTION CLASE        -------------------");
@@ -101,15 +76,15 @@ public class App {
 			break;
 
 		case 2:
-			insertar();
+			new Insert().insertar();
 			break;
 
 		case 3:System.out.println("Sin terminar!!!!!!!!!!!");
-			//new Update().modificar();
+			new Update().modificar();
 			break;
 			
 		case 4: System.out.println("Sin terminar!!!!!!!!!!!");
-			//new Delete().borrarAlumno();
+			new Delete().borrarAlumno();
 			break;
 		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero");
 			opcion = 99;
