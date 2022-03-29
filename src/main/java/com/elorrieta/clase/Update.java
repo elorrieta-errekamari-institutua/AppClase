@@ -2,6 +2,7 @@ package com.elorrieta.clase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Update {
@@ -36,8 +37,16 @@ public class Update {
 				}
 			}
 			//TODO falta sacar un mensaje si la id que introduce no existe en la bbdd
+			//String sql2 = "SELECT id_alumno FROM clase.alumno WHERE id_alumno = ?;";
+			//PreparedStatement pst2 = con.prepareStatement(sql2);
+			//ResultSet rs2 = pst2.executeQuery();
+			//if(rs2.last()){
+	           //System.out.println("El alumno existe");
+	        //}
+	        //else{
+	           //System.out.println("El alumno no existe");
+	        //}
 			
-
 			System.out.println("Introduce un nombre");
 			nombre = sc.nextLine();
 
