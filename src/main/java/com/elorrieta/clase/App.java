@@ -39,19 +39,29 @@ public class App {
 	 */
 	private static void login() {
 
-		int id;
-		String nombre;
+		int id = 0;
+		String nombre = null;
+		boolean error = false;
 
-		System.out.println("Ingresa el ID");
-		id = Integer.parseInt(sc.nextLine().trim());
-		System.out.println("Ingresa el nombre");
-		nombre = sc.nextLine();
-		if (getUnAlumno(id, nombre)) {
-			System.out.println("BIENVENIDO");
-			switchMenu();
-		}
-		
-		// TODO hay que hacer un merge despues de completar 
+		do {
+			try {
+				System.out.println("Ingresa el ID");
+				id = Integer.parseInt(sc.nextLine().trim());
+				System.out.println("Ingresa el nombre");
+				nombre = sc.nextLine();
+			} catch (Exception e) {
+				System.out.println("Error en la introduccion de datos");
+			}
+			if (getUnAlumno(id, nombre)) {
+				System.out.println("BIENVENIDO");
+				switchMenu();
+				
+			} else {
+				System.out.println("Usuario o ID incorrecto, introduzca los datos de nuevo...");
+				error=true;
+			}
+		} while (error);
+
 	}
 
 	private static boolean getUnAlumno(int idAl, String nombreAl) {
