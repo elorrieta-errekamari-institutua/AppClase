@@ -25,41 +25,7 @@ public class App {
 
 	private static Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) {
 
-		System.out.println("Comenzamos");
-		boolean flag = true;
-
-		do {
-
-			opcion = menu();
-
-			switch (opcion) {
-			case OPCION_LISTAR:
-				new Select().listar();
-				break;
-
-			case OPCION_INSERTAR:
-				insertar();
-				break;
-				
-			case OPCION_MODIFICAR:
-				new Update().modificar();
-				break;
-
-			case OPCION_SALIR:
-				flag = false;
-				break;
-
-			default:
-				break;
-			}
-
-		} while (flag);
-
-		System.out.println("Terminamos");
-
-	}// main
 
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
@@ -97,7 +63,7 @@ public class App {
 	 * 
 	 * @return int opcion seleccionada por el usuario;
 	 */
-	private int menu() {
+	private static int menu() {
 		int op = 0;
 		boolean error = false;
 
@@ -130,7 +96,7 @@ public class App {
 
 	
 	
-	private void leerOpcionMenu(int opcion) {
+	private static void leerOpcionMenu(int opcion) {
 	
 		switch (opcion) {
 		case 0: System.out.println("¡¡¡¡Que tennga un buen dia!!!!");
@@ -156,7 +122,7 @@ public class App {
 		}
 	}	
 	
-	public void empezarPrograma() {
+	public static void main(String[] args) {
 		int opcion=0;
 		
 		do {
