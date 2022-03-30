@@ -37,16 +37,18 @@ public class Update {
 				}
 			}
 			//sentencia para preguntar si la id introducida existe en la bbdd
-			String sql2 = "SELECT id_alumno FROM clase.alumno WHERE id_alumno = ?;";
+			String sql2 = "SELECT id_alumno, nombre, email FROM clase.alumno WHERE id_alumno = ?;";
 			PreparedStatement pst2 = con.prepareStatement(sql2);
 			// asignar datos introducidos a los interrogantes
 			pst2.setInt(1, id);
 			ResultSet rs2 = pst2.executeQuery();
 			//si la id existe pedimos los datos
 			if(rs2.next()){
-	           System.out.println("Introduce un nombre");
+				System.out.println("El nombre actual es : " + rs2.getString("nombre"));
+	            System.out.println("Introduce un nuevo nombre");
 				nombre = sc.nextLine();
 
+				System.out.println("El email actual es : " + rs2.getString("email"));
 				System.out.println("Introduce un email");
 				email = sc.nextLine();
 
@@ -61,7 +63,7 @@ public class Update {
 
 	        }
 	        else{
-	           System.out.println("El alumno no existe");
+	           System.out.println("La id introducida no se encuentra en la base de datos, el alumno no existe");
 	        }
 			
 			
