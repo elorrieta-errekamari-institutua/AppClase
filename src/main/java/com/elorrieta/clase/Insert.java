@@ -24,7 +24,7 @@ public class Insert {
 			String nombre = sc.nextLine();
 
 			System.out.println("Introduce el gmail");
-			String email = sc.nextLine();
+			String email = sc.nextLine().trim();
 
 			encontrado = new Select().buscarEmail(email);
 			if (encontrado) {
