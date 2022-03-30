@@ -36,7 +36,7 @@ public class App {
 		System.out.println(" 1 - Listar Alumnos");
 		System.out.println(" 2 - Insertar Nuevo Alumno");
 		System.out.println(" 3 - Modificar Alumno Existente");
-		System.out.println(" 4 - asdasdasdasd ");
+		System.out.println(" 4 - Borrar Alumno ");
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
@@ -71,7 +71,7 @@ public class App {
 			new Update().modificar(sc);
 			break;
 			
-		case 4: System.out.println("Sin terminar!!!!!!!!!!!");
+		case 4: 
 			new Delete().borrarAlumno(sc);
 			break;
 		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero" + opcion);
