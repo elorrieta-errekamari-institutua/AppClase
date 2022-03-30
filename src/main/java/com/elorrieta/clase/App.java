@@ -22,7 +22,7 @@ public class App {
 	private static final int OPCION_SALIR = 0;
 
 	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
-
+	private static final String SQL_ELIMINARALUMNO = "delete from  clase.alumno where id_alumno = ? ;";
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
 	private static Scanner sc = new Scanner(System.in);
@@ -45,6 +45,10 @@ public class App {
 				insertar();
 				break;
 
+			case OPCION_ELIMINAR:
+				eliminar();
+				break;
+				
 			case OPCION_SALIR:
 				flag = false;
 				break;
@@ -120,6 +124,107 @@ public class App {
 		}
 
 	}// listar
+	
+	
+	/**
+	 * eliminar un alumno: pregunta a quien se quiere eliminar por id y si existe lo
+	 * elimina, si no da error y vuelve a preguntar. Preguntar hasta que diga no
+	 */
+	private static void eliminar() {
+		String muestra = "SELECT id_alumno,nombre,email,pass\r\n" + "FROM alumno\r\n" + "WHERE id_alumno = ?;";
+		String respuesta;
+		String comprobacion = null;
+		boolean flateliminar = true;
+		boolean flag2 = true;
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_ELIMINARALUMNO);
+				PreparedStatement pst2 = con.prepareStatement(muestra); // hace un select para mostrar a quien borras
+		) {
+			do {
+				//TODO HAY UN BUG rarisimo donde a la 2º vuelta si le dice que no quieres seguir, sigue, pero solo en una condicion especifica
+				//TODO ¿como hacer si el usuario mete un espacio vacio?
+				//TODO evitar que pongan algo que no sea numero
+				System.out.println("Introduce el ID del alumno a eliminar ");
+				int idalumno = Integer.parseInt(sc.nextLine());
+
+				pst.setInt(1, idalumno);
+				pst2.setInt(1, idalumno);
+				ResultSet rs = pst2.executeQuery();
+
+				if (rs.next()) { 
+
+					System.out.println("-------------------------------------------------------");
+					System.out.println(" ID            nombre            email");
+					System.out.println("-------------------------------------------------------");
+					
+
+						int id = rs.getInt("id_alumno");
+						String nombre = rs.getString("nombre");
+						String email = rs.getString("email");
+						System.out.printf(" %-4s %-25s %s \n", id, nombre, email);
+					
+
+				} else {
+					System.out.println("no existe el alumno introducido\n");
+					flag2 = false;
+				} // else
+				
+				
+				while (flag2) {
+					System.out.println("¿quiere eliminar a este alumno?: si /no");
+					comprobacion = sc.nextLine();
+
+					if ("si".equalsIgnoreCase(comprobacion) || "no".equalsIgnoreCase(comprobacion)) {
+						flag2 = false;
+					} else {
+						System.out.println("Por favor introduce SI o NO");
+					}
+
+				}
+				
+				
+				if ("si".equalsIgnoreCase(comprobacion)) {
+					int filasEliminadas = pst.executeUpdate();
+					System.out.printf("entro la orden\n %s alumnos ha sido eliminados \n\n", filasEliminadas);
+
+				} else if ("no".equalsIgnoreCase(comprobacion)) {
+					flateliminar = false;
+				}
+			
+
+				// preguntar si quieree seguir
+				boolean flag = true;
+
+				do {
+					System.out.println("¿quiere seguir eliminando?: si /no");
+					respuesta = sc.nextLine();
+
+					if ("si".equalsIgnoreCase(respuesta) || "no".equalsIgnoreCase(respuesta)) {
+						flag = false;
+					} else {
+						System.out.println("Por favor introduce SI o NO");
+					}
+
+				} while (flag);
+
+				if ("si".equalsIgnoreCase(respuesta)) {
+					eliminar();
+				} else if ("no".equalsIgnoreCase(respuesta)) {
+					flateliminar = false;
+				}
+
+				// TODO EXCPCINES
+
+			} while (flateliminar);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("error");
+			e.printStackTrace();
+		}
+
+	}//fianl de eliminar
 
 	/**
 	 * Pinta por pantalla el menu de la App y pide al usuario que seleccione una
