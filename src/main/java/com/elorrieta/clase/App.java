@@ -230,7 +230,7 @@ public class App {
 		boolean error = false;
 
 		System.out.println("----------------------------------------------------");
-		System.out.println("-----   APP GESTION CLASE        -------------------");
+		System.out.println("-----   APP GESTION CLASE   -------------------");
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 1 - Listar Alumnos");
 		System.out.println(" 2 - Insertar Nuevo Alumno");
