@@ -67,14 +67,14 @@ public class App {
 			new Insert().insertar(sc);
 			break;
 
-		case 3:System.out.println("Sin terminar !!!!!!!!!!!");
+		case 3:
 			new Update().modificar(sc);
 			break;
 			
 		case 4: 
 			new Delete().borrarAlumno(sc);
 			break;
-		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero" + opcion);
+		default: System.out.println("Opcion incorrecta, vuelva a seleccionar numero");
 			opcion = 99;
 		}
 	}	

@@ -36,32 +36,35 @@ public class Update {
 					System.out.println("Introduce la id del alumno que deseas modificar");
 				}
 			}
-			//TODO falta sacar un mensaje si la id que introduce no existe en la bbdd
-			//String sql2 = "SELECT id_alumno FROM clase.alumno WHERE id_alumno = ?;";
-			//PreparedStatement pst2 = con.prepareStatement(sql2);
-			//ResultSet rs2 = pst2.executeQuery();
-			//if(rs2.last()){
-	           //System.out.println("El alumno existe");
-	        //}
-	        //else{
-	           //System.out.println("El alumno no existe");
-	        //}
-			
-			System.out.println("Introduce un nombre");
-			nombre = sc.nextLine();
-
-			System.out.println("Introduce un email");
-			email = sc.nextLine();
-
+			//sentencia para preguntar si la id introducida existe en la bbdd
+			String sql2 = "SELECT id_alumno FROM clase.alumno WHERE id_alumno = ?;";
+			PreparedStatement pst2 = con.prepareStatement(sql2);
 			// asignar datos introducidos a los interrogantes
-			pst.setString(1, nombre);
-			pst.setString(2, email);
-			pst.setInt(3, id);
+			pst2.setInt(1, id);
+			ResultSet rs2 = pst2.executeQuery();
+			//si la id existe pedimos los datos
+			if(rs2.next()){
+	           System.out.println("Introduce un nombre");
+				nombre = sc.nextLine();
 
-			// ejecutar la select
-			pst.executeUpdate();
-			System.out.println("Alumno Actualizado");
+				System.out.println("Introduce un email");
+				email = sc.nextLine();
 
+				// asignar datos introducidos a los interrogantes
+				pst.setString(1, nombre);
+				pst.setString(2, email);
+				pst.setInt(3, id);
+
+				// ejecutar la select
+				pst.executeUpdate();
+				System.out.println("Alumno Actualizado");
+
+	        }
+	        else{
+	           System.out.println("El alumno no existe");
+	        }
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
