@@ -41,7 +41,6 @@ public class Select {
 
 	}
 
-	
 	public boolean buscarId(int id) {
 
 		int i = 0;
@@ -54,25 +53,52 @@ public class Select {
 
 		) {
 
-			
 			while (rs.next()) {
 
 				if (id == rs.getInt("id_alumno")) {
 					encontrado = true;
-				}else {
+				} else {
 					encontrado = false;
-				}	
-				
-			} // while
+				}
 
-			
+			} // while
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return encontrado;
 	}
+
+	public boolean buscarEmail(String email) {
+
+		int i = 0;
+		boolean encontrado = false;
+		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno ASC;";
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+
+		) {
+
+			while (rs.next()) {
+
+				if (email.equals(rs.getString("email"))) {
+					encontrado = true;
+				} else {
+					encontrado = false;
+				}
+
+			} // while
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return encontrado;
+	}
+
 	
 	
 }
