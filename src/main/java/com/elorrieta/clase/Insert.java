@@ -13,7 +13,7 @@ public class Insert {
 	public void insertar(Scanner sc) {
 
 		
-		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(App.SQL_INSERTALUMNO);
+		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement("INSERT INTO alumno (nombre, email) VALUES (?,?)");
 
 		) {
 

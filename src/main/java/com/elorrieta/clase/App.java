@@ -12,10 +12,6 @@ import java.util.Scanner;
  */
 public class App {
 
-
-
-	static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
-
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
 	public static Scanner sc = new Scanner(System.in);
