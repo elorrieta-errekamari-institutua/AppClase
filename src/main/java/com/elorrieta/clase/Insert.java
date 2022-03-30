@@ -10,9 +10,8 @@ public class Insert {
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 * @param sc2 
 	 */
-	public static void insertar(Scanner sc2) {
+	public void insertar(Scanner sc) {
 
-		Scanner sc = new Scanner(System.in);
 		
 		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(App.SQL_INSERTALUMNO);
 
