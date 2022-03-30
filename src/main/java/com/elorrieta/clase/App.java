@@ -60,6 +60,38 @@ public class App {
 	}// main
 
 	/**
+	 * Buscamos un Alumno por su identificador
+	 * 
+	 * @param id int identificador del alumno, que es la columna id en la tabla
+	 *           clase
+	 * @return si lo encuentra me retorna el "nombre + email", si no lo encuentra
+	 *         null
+	 */
+	@SuppressWarnings("unused")
+	private static String buscarAlumno(int id) {
+
+		String resul = null;
+		String sql = "SELECT id_alumno, nombre, email FROM alumno WHERE id_alumno = ?;";
+		try (Connection con = Conexion.getConnection(); 
+			 PreparedStatement pst = con.prepareStatement(sql);)
+	   {
+
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			
+			if ( rs.next() ) {
+				resul = rs.getString("nombre") + " " + rs.getString("email");
+			}
+			
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		}
+
+		return resul;
+	}
+
+	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
 	private static void insertar() {
