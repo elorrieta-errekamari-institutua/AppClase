@@ -24,7 +24,12 @@ Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristiqu
 
 ## Diagrama BBDD
 
-Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristique, sociis malesuada nec blandit. Molestie dui varius at pharetra id congue nibh, etiam taciti ut class interdum viverra neque, egestas nunc fermentum justo fringilla elementum. Etiam dapibus tristique nec justo rhoncus per lacus faucibus sapien arcu massa ridiculus, fermentum taciti mollis facilisi vehicula nam blandit varius euismod sed venenatis, habitant donec molestie netus potenti dis ut pellentesque risus auctor cursus
+Disponemos de una bbdd en [pulsa](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql)
+
+A continuacion se muestra una imagen la composicion de la tabla que utilizamos
+
+![Estructura bbdd] (/screenshots/tablabbdd.PNG)
+
 
 
 ## Versiones
