@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -253,7 +254,6 @@ public class App {
 				pst.setString(1, nombre);
 				pst.setString(2, email);
 
-
 				pst.executeUpdate();
 				System.out.println("Alumno insertado");
 				duplicate = false;
@@ -353,7 +353,7 @@ public class App {
 
 		do {
 			try {
-				op = Integer.parseInt(sc.nextLine().trim());
+				op = App.isNumberMenu();
 				if (opcion < 0 && opcion > 4) {
 					error = true;
 					System.out.println("Debe introducir un numero del 0 al 4");
@@ -365,6 +365,25 @@ public class App {
 			}
 		} while (error);
 		return op;
-	}
+	}// App
 
-}// App
+public static int isNumberMenu() {
+	
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Introduce la opcion deseada");
+	int opcion = 0;
+	try {
+		opcion = sc.nextInt();
+		if (!(1 <= opcion && opcion <= 4)) {
+			System.out.println("El numero introducido no estaba entre las opciones posibles ( |1||2||3||4| )");
+			opcion = isNumberMenu();
+		}
+	} catch (InputMismatchException e) {
+		System.out.println();
+		System.out.println("No has introducido un numero");
+		System.out.println();
+		opcion = isNumberMenu();
+	}
+	return opcion;
+	}
+}
