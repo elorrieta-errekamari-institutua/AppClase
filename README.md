@@ -24,7 +24,7 @@ Disponemos de una bbdd en [pulsa](https://github.com/elorrieta-errekamari-instit
 
 A continuacion se muestra una imagen la composicion de la tabla que utilizamos
 
-![Estructura bbdd] (/screenshots/tablabbdd.PNG)
+![Estructura bbdd] (https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/screenshots/tablabbdd.PNG)
 
 
 
