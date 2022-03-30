@@ -55,13 +55,12 @@ public class App {
 			if (getUnAlumno(id, nombre)) {
 				System.out.println("BIENVENIDO");
 				switchMenu();
-				
+
 			} else {
 				System.out.println("Usuario o ID incorrecto, introduzca los datos de nuevo...");
-				error=true;
+				error = true;
 			}
 		} while (error);
-
 	}
 
 	private static boolean getUnAlumno(int idAl, String nombreAl) {
@@ -125,15 +124,17 @@ public class App {
 	private static void deleteAlumno() {
 		System.out.println("Escribe el ID del alumno que quieres eliminar: ");
 		int id = Integer.parseInt(sc.nextLine().trim());
-
+		// TODO vamos a preguntar si queremos eliminar o no
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(SQL_DELETEALUMNO);) {
+
 			pst.setInt(1, id);
 			int lineasEliminadas = pst.executeUpdate();
-			if (lineasEliminadas > 0)
+			if (lineasEliminadas == 1) {
 				System.out.println(" El alumno se a eliminado correctamente ");
-			else
+			} else {
 				System.out.println("No se ha encontrado el alumno");
+			}
 
 		} catch (Exception e) {
 			System.out.println("No se ha encontrado el usuario que desea eliminar");
@@ -246,8 +247,8 @@ public class App {
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 1 - Listar Alumnos");
 		System.out.println(" 2 - Insertar Nuevo Alumno");
-		System.out.println(" 3 - sdasdasdasd");
-		System.out.println(" 4 - asdasdasdasd ");
+		System.out.println(" 3 - Modificar");
+		System.out.println(" 4 - Eliminar ");
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
