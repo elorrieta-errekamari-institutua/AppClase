@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -243,13 +245,14 @@ public class App {
 					PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);) {
 
 				System.out.println("Introduce el nombre");
-				String nombre = sc.nextLine();
+				String nombre = App.isString();
 
 				System.out.println("Introduce el gmail");
-				String email = sc.nextLine();
+				String email = App.isGmail();
 
 				pst.setString(1, nombre);
 				pst.setString(2, email);
+
 
 				pst.executeUpdate();
 				System.out.println("Alumno insertado");
@@ -297,6 +300,36 @@ public class App {
 
 	}// listar
 
+	public static String isGmail() {
+		Scanner sc = new Scanner(System.in);
+		Pattern pat = Pattern.compile("^([\\w]*[\\w\\.]*(?!\\.)@gmail.com)");
+		String dni = sc.nextLine();
+		Matcher mat = pat.matcher(dni);
+		while (!mat.matches()) {
+			System.out.println("Has introducido un gmail invalido, por favor introduzca uno válido.");
+			System.out.print("Introduce un gmail válido: ");
+			dni = sc.nextLine();
+			mat = pat.matcher(dni);
+		}
+		return dni;
+
+	}
+
+	public static String isString() {
+		Scanner sc = new Scanner(System.in);
+		Pattern pat = Pattern.compile("[a-zA-Z ]{2,254}");
+		String dni = sc.nextLine();
+		Matcher mat = pat.matcher(dni);
+		while (!mat.matches()) {
+			System.out.println("Has introducido un nombre invalido, por favor introduzca uno válido.");
+			System.out.print("Introduce un nombre válido: ");
+			dni = sc.nextLine();
+			mat = pat.matcher(dni);
+		}
+		return dni;
+
+	}
+
 	/**
 	 * Pinta por pantalla el menu de la App y pide al usuario que seleccione una
 	 * opcion
@@ -308,7 +341,7 @@ public class App {
 		boolean error = false;
 
 		System.out.println("----------------------------------------------------");
-		System.out.println("-----   APP GESTION CLASE        -------------------");
+		System.out.println("-----   APP GESTION CLASE   -------------------");
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 1 - Listar Alumnos");
 		System.out.println(" 2 - Insertar Nuevo Alumno");
