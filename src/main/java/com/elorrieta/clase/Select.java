@@ -3,6 +3,7 @@ package com.elorrieta.clase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Select {
 
@@ -41,6 +42,11 @@ public class Select {
 
 	}
 
+	/**
+	 * Busca el id del alumno en la BBDD
+	 * @param id recibe un id de alumno que mete el usuario
+	 * @return true si el id existe, false si no existe
+	 */
 	public boolean buscarId(int id) {
 
 		int i = 0;
@@ -63,6 +69,8 @@ public class Select {
 
 			} // while
 
+		} catch (SQLException sqle) {
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,6 +78,11 @@ public class Select {
 		return encontrado;
 	}
 
+	/**
+	 * Busca email de alumno
+	 * @param email recibe email que inserta usuario para buscar si existe en la BBDD
+	 * @return true si el email existe, false si no existe
+	 */
 	public boolean buscarEmail(String email) {
 
 		int i = 0;
@@ -99,6 +112,4 @@ public class Select {
 		return encontrado;
 	}
 
-	
-	
 }

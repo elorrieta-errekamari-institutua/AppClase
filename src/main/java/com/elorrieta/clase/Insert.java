@@ -38,8 +38,7 @@ public class Insert {
 			}
 
 		} catch (SQLException sqle) {
-			System.out.println("----  ERROR con la BBDD --------");
-			System.out.println("Ya existe el Email insertado.\n");
+			System.out.println("Este email ya esta registrado, Vamos al menu.\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
