@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 /**
  * App para hacer un CRUD completo para la bbdd de clase.sql
  * 
@@ -30,7 +32,8 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		login();
+		// login();
+		switchMenu();
 
 	}// main
 
@@ -54,7 +57,6 @@ public class App {
 			}
 			if (getUnAlumno(id, nombre)) {
 				System.out.println("BIENVENIDO");
-				switchMenu();
 
 			} else {
 				System.out.println("Usuario o ID incorrecto, introduzca los datos de nuevo...");
@@ -65,7 +67,7 @@ public class App {
 
 	private static boolean getUnAlumno(int idAl, String nombreAl) {
 		boolean encontrado = false;
-		String sql = "SELECT id_alumno, nombre FROM clase.alumno;";
+		String sql = "SELECT id_alumno, nombre FROM alumno;";
 
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
@@ -76,7 +78,6 @@ public class App {
 					encontrado = true;
 				}
 			}
-			// TODO falta repetir mientras no sea correcto
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,20 +125,35 @@ public class App {
 	private static void deleteAlumno() {
 		System.out.println("Escribe el ID del alumno que quieres eliminar: ");
 		int id = Integer.parseInt(sc.nextLine().trim());
-		// TODO vamos a preguntar si queremos eliminar o no
-		try (Connection con = Conexion.getConnection();
-				PreparedStatement pst = con.prepareStatement(SQL_DELETEALUMNO);) {
 
-			pst.setInt(1, id);
-			int lineasEliminadas = pst.executeUpdate();
-			if (lineasEliminadas == 1) {
-				System.out.println(" El alumno se a eliminado correctamente ");
-			} else {
-				System.out.println("No se ha encontrado el alumno");
+		String alumno = buscarAlumno(id);
+		System.out.println("Desea eliminar al alumno " + alumno + " ?");
+		System.out.println("Pulsa S (si) / N (no)");
+		String confirmar = sc.nextLine();
+
+		if ("s".equalsIgnoreCase(confirmar)) {
+			try (Connection con = Conexion.getConnection();
+					PreparedStatement pst = con.prepareStatement(SQL_DELETEALUMNO);) {
+
+				pst.setInt(1, id);
+				int lineasEliminadas = pst.executeUpdate();
+				if (lineasEliminadas == 1) {
+					System.out.println(" El alumno se a eliminado correctamente ");
+				} else {
+					System.out.println("No se ha encontrado el alumno");
+				}
+
+			} catch (Exception e) {
+				System.out.println("No se ha encontrado el usuario que desea eliminar");
 			}
 
-		} catch (Exception e) {
-			System.out.println("No se ha encontrado el usuario que desea eliminar");
+		} else {
+			System.out.println("Volviendo al menu principal.....");
+			System.out.println(" ");
+			System.out.println(" ");
+			System.out.println(" ");
+			System.out.println(" ");
+
 		}
 	}
 
@@ -146,56 +162,105 @@ public class App {
 	 * 
 	 */
 	private static void modificarAlumno() {
+
 		System.out.println("Escribe el ID del alumno que quieres Modificar: ");
 		int id = Integer.parseInt(sc.nextLine().trim());
-		System.out.println(" NOMBRE ");
-		String nombre = sc.nextLine();
-		System.out.println(" EMAIL ");
-		String email = sc.nextLine();
-		try (Connection con = Conexion.getConnection();
-				PreparedStatement pst = con.prepareStatement(SQL_UPDATEALUMNO);) {
-			// UPDATE CLIENTE
-			pst.setString(1, nombre);
-			pst.setString(2, email);
-			pst.setInt(3, id);
-			int lineasEliminadas = pst.executeUpdate();
-			if (lineasEliminadas > 0)
-				System.out.println(" El alumno se a eliminado correctamente ");
-			else
-				System.out.println("No se ha encontrado el alumno");
 
-		} catch (Exception e) {
-			System.out.println("No se ha encontrado el usuario que desea eliminar");
+		String alumno = buscarAlumno(id);
+		System.out.println("Desea modificar al alumno " + alumno + " ?");
+		System.out.println("Pulsa S (si) / N (no)");
+		String confirmar = sc.nextLine();
+
+		if ("s".equalsIgnoreCase(confirmar)) {
+			System.out.println(" NOMBRE ");
+			String nombre = sc.nextLine();
+			System.out.println(" EMAIL ");
+			String email = sc.nextLine();
+
+			try (Connection con = Conexion.getConnection();
+					PreparedStatement pst = con.prepareStatement(SQL_UPDATEALUMNO);) {
+
+				// UPDATE CLIENTE
+				pst.setString(1, nombre);
+				pst.setString(2, email);
+				pst.setInt(3, id);
+				int lineasEliminadas = pst.executeUpdate();
+				if (lineasEliminadas > 0)
+					System.out.println(" El alumno se a eliminado correctamente ");
+				else
+					System.out.println("No se ha encontrado el alumno");
+
+			} catch (Exception e) {
+				System.out.println("No se ha encontrado el usuario que desea eliminar");
+			}
+		} else {
+
+			System.out.println("Volviendo al menu principal.....");
+			System.out.println(" ");
+			System.out.println(" ");
+			System.out.println(" ");
+			System.out.println(" ");
 		}
+	}
+
+	/**
+	 * Buscamos un Alumno por su identificador
+	 * 
+	 * @param id int identificador del alumno, que es la columna id en la tabla
+	 *           clase
+	 * @return si lo encuentra me retorna el "nombre + email", si no lo encuentra
+	 *         null
+	 */
+	@SuppressWarnings("unused")
+	private static String buscarAlumno(int id) {
+
+		String resul = null;
+		String sql = "SELECT id_alumno, nombre, email FROM alumno WHERE id_alumno = ?;";
+		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+
+			if (rs.next()) {
+				resul = rs.getString("nombre") + " " + rs.getString("email");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return resul;
 	}
 
 	/**
 	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
 	private static void insertar() {
+		boolean duplicate = false;
 
-		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
+		do {
+			try (Connection con = Conexion.getConnection();
+					PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);) {
 
-		) {
+				System.out.println("Introduce el nombre");
+				String nombre = sc.nextLine();
 
-			System.out.println("Introduce el nombre");
-			String nombre = sc.nextLine();
+				System.out.println("Introduce el gmail");
+				String email = sc.nextLine();
 
-			System.out.println("Introduce el gmail");
-			String email = sc.nextLine();
+				pst.setString(1, nombre);
+				pst.setString(2, email);
 
-			// TODO validar campos y capturar excepcion de email capturado
-
-			pst.setString(1, nombre);
-			pst.setString(2, email);
-
-			pst.executeUpdate();
-			System.out.println("Alumno insertado");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+				pst.executeUpdate();
+				System.out.println("Alumno insertado");
+				duplicate = false;
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				System.out.println("Email dupiclate ");
+				duplicate = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} while (duplicate);
 	}// insertar
 
 	/**
