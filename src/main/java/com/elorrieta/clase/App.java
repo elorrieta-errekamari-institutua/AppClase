@@ -35,7 +35,7 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		//login();
+		login();
 		switchMenu();
 
 	}// main
