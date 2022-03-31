@@ -300,8 +300,10 @@ public class App {
 
 	}// listar
 
-	public static String isGmail() {
-		Scanner sc = new Scanner(System.in);
+	/**
+	 */
+	public static String isGmail(Scanner sc) {
+		
 		Pattern pat = Pattern.compile("^([\\w]*[\\w\\.]*(?!\\.)@gmail.com)");
 		String dni = sc.nextLine();
 		Matcher mat = pat.matcher(dni);
