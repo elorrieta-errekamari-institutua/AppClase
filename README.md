@@ -8,6 +8,8 @@ Proyecto **JAVA** contra una Base de Datos **MySQL** para gestionar los alumnos 
 En primera instancia se debe introducir un usuario y una contraseña válida para poder acceder al menú principal. Si los credenciales son incorrectos se volverán a pedir y no dejara acceder.
 
 Para poder ejecutar el programa debemos loguearnos con el **[User: admin] [password: admin]**
+![](screenshots/Login.PNG)
+
 
 Una vez dentro, lo primero que se ve es un menú con 4 opciones más la opción de salir
 
