@@ -42,11 +42,10 @@ Un dato a tener en cuenta es tener bien **la url de conexión** con la BBDD, la 
 	DriverManager.getConnection("jdbc:mysql://localhost:3306/clase?useSSL=false", "root", "root");
 ```
 
-
+Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql) se puede ver y descargar el script para montar en tu programa de gestión de BBDD.
 
 ## Diagrama BBDD
 
-Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql) se puede ver y descargar el script para montar en tu programa de gestión de BBDD.
 
 A continuación se muestra una imagen con la composición de la tabla que utilizamos
 
