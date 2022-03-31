@@ -44,6 +44,11 @@ Un dato a tener en cuenta es tener bien **la url de conexión** con la BBDD, la 
 	DriverManager.getConnection("jdbc:mysql://localhost:3306/clase?useSSL=false", "root", "root");
 ```
 
+En el código:
+- 3306 se refiere al puerto, debeis cambiar al puerto con el que trabajais en el gestor de BBDD.
+- clase es el nombre de la BBDD.
+- "root" "root", es el nombre y password del gestor de BBDD que utilizamos, debeis cambiarlo al que vosotros usais.
+
 Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql) se puede ver y descargar el script para montar en tu programa de gestión de BBDD.
 
 ## Diagrama BBDD
