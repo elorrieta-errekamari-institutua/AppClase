@@ -35,11 +35,9 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		login();
-=======
-		//login();
->>>>>>> branch 'ioer-denis-inaki' of https://github.com/elorrieta-errekamari-institutua/AppClase.git
+
+		 login();
+
 		switchMenu();
 
 	}// main
@@ -58,7 +56,7 @@ public class App {
 				System.out.println("Ingresa el ID");
 				id = Integer.parseInt(sc.nextLine().trim());
 				System.out.println("Ingresa el nombre");
-				nombre = sc.nextLine();
+				nombre = isString();
 			} catch (Exception e) {
 				System.out.println("Error en la introduccion de datos");
 			}
@@ -93,12 +91,12 @@ public class App {
 	}
 
 	public static void switchMenu() {
-
+		menu();
 		System.out.println("Comenzamos");
 		boolean flag = true;
 
 		do {
-			opcion = menu();
+			opcion = isNumberMenu();
 
 			switch (opcion) {
 			case OPCION_LISTAR:
@@ -136,7 +134,12 @@ public class App {
 		String alumno = buscarAlumno(id);
 		System.out.println("Desea eliminar al alumno " + alumno + " ?");
 		System.out.println("Pulsa S (si) / N (no)");
-		String confirmar = sc.nextLine();
+		String confirmar = isString();
+
+		while (!(confirmar.equalsIgnoreCase("s") || confirmar.equalsIgnoreCase("n"))) {
+			System.out.println("Pulsa S (si) / N (no)");
+
+		}
 
 		if ("s".equalsIgnoreCase(confirmar)) {
 			try (Connection con = Conexion.getConnection();
@@ -218,7 +221,7 @@ public class App {
 	 * @return si lo encuentra me retorna el "nombre + email", si no lo encuentra
 	 *         null
 	 */
-	@SuppressWarnings("unused")
+
 	private static String buscarAlumno(int id) {
 
 		String resul = null;
@@ -322,18 +325,15 @@ public class App {
 	}
 
 	public static String isString() {
-
-		Pattern pat = Pattern.compile("[a-zA-Z ]{2,254}");
-		String dni = sc.nextLine();
-		Matcher mat = pat.matcher(dni);
-		while (!mat.matches()) {
-			System.out.println("Has introducido un nombre invalido, por favor introduzca uno válido.");
-			System.out.print("Introduce un nombre válido: ");
-			dni = sc.nextLine();
-			mat = pat.matcher(dni);
+		Scanner sc = new Scanner(System.in);
+		String String = null;
+		try {
+			String = sc.next();
+		} catch (Exception e) {
+			System.out.println("No has introducido una campo valido");
+			isString();
 		}
-		return dni;
-
+		return String;
 	}
 
 	/**
@@ -342,9 +342,7 @@ public class App {
 	 * 
 	 * @return int opcion seleccionada por el usuario;
 	 */
-	private static int menu() {
-		int op = 0;
-		boolean error = false;
+	private static void menu() {
 
 		System.out.println("----------------------------------------------------");
 		System.out.println("-----   APP GESTION CLASE   -------------------");
@@ -357,30 +355,17 @@ public class App {
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
 
-		do {
-			try {
-				op = App.isNumberMenu();
-				if (opcion < 0 && opcion > 4) {
-					error = true;
-					System.out.println("Debe introducir un numero del 0 al 4");
-				}
-			} catch (Exception e) {
-				error = true;
-				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
-				e.printStackTrace();
-			}
-		} while (error);
-		return op;
 	}// App
 
 	public static int isNumberMenu() {
-
+		// COMPROBAR NUMERO MENU
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce la opcion deseada");
 		int opcion = 0;
 		try {
 			opcion = sc.nextInt();
 			if (!(1 <= opcion && opcion <= 4)) {
-				System.out.println("El numero introducido no estaba entre las opciones posibles ( |1||2||3||4| )");
+				System.out.println("El numero introducido no estaba entre las opciones posibles 1 al 4");
 				opcion = isNumberMenu();
 			}
 		} catch (InputMismatchException e) {
