@@ -106,8 +106,8 @@ public class App {
 			System.out.println("Introduce el gmail");
 			String email = sc.nextLine();
 
-			// TODO validar campos y capturar excepcion de email capturado
-
+			//TODO validar campos y capturar excepcion
+			
 			pst.setString(1, nombre);
 			pst.setString(2, email);
 
