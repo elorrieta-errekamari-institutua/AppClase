@@ -34,7 +34,7 @@ Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristiqu
 
 ## Diagrama BBDD
 
-Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql) se puede ver el script
+Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql) se puede ver y descargar el script para montar en tu programa de gestion de BBDD.
 
 A continuacion se muestra una imagen con la composicion de la tabla que utilizamos
 
