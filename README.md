@@ -1,4 +1,4 @@
-# jbdc
+# GESTIÓN DE ALUMNOS
 
 Proyecto **JAVA** contra una Base de Datos **MySQL** para gestionar los alumnos mediante sentencias **CRUD** de SQL.
 
