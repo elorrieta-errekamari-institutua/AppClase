@@ -10,8 +10,9 @@ Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristiqu
 
 ## Tecnologias que se han usado
 
-Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristique, sociis malesuada nec blandit. Molestie dui varius at pharetra id congue nibh, etiam taciti ut class interdum viverra neque, egestas nunc fermentum justo fringilla elementum. Etiam dapibus tristique nec justo rhoncus per lacus faucibus sapien arcu massa ridiculus, fermentum taciti mollis facilisi vehicula nam blandit varius euismod sed venenatis, habitant donec molestie netus potenti dis ut pellentesque risus auctor cursus
-
+- MySql
+- Java 8
+- Maven
 
 ## Montaje y ejecucion
 
@@ -20,11 +21,11 @@ Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristiqu
 
 ## Diagrama BBDD
 
-Disponemos de una bbdd en [pulsa](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql)
+Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/clase.sql) se puede ver el script
 
-A continuacion se muestra una imagen la composicion de la tabla que utilizamos
+A continuacion se muestra una imagen con la composicion de la tabla que utilizamos
 
-![Estructura bbdd] (https://github.com/elorrieta-errekamari-institutua/AppClase/blob/javier_ibon/screenshots/tablabbdd.PNG)
+![Estructura bbdd](screenshots/tablabbdd.PNG)
 
 
 
