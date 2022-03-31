@@ -51,6 +51,6 @@ A continuacion se muestra una imagen con la composicion de la tabla que utilizam
 
 ## Versiones
 
-La version actual del proyecto es la inicial, 1.0.0
+La version actual del proyecto es la inicial, 1.0.0.
 
 
