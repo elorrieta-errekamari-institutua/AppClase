@@ -1,5 +1,8 @@
 package com.elorrieta.clase;
 
+// commit1
+//commit2
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,8 +109,8 @@ public class App {
 			System.out.println("Introduce el gmail");
 			String email = sc.nextLine();
 
-			// TODO validar campos y capturar excepcion de email capturado
-
+			//TODO validar campos y capturar excepcion
+			
 			pst.setString(1, nombre);
 			pst.setString(2, email);
 
