@@ -38,7 +38,7 @@ Disponemos de una bbdd en MySql. En este [enlace](https://github.com/elorrieta-e
 
 A continuacion se muestra una imagen con la composicion de la tabla que utilizamos
 
-![Estructura bbdd](screenshsots/tablabbdd.PNG)
+![Estructura bbdd](screenshots/tablabbdd.PNG)
 
 
 
