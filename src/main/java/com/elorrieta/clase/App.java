@@ -35,7 +35,11 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		login();
+=======
+		//login();
+>>>>>>> branch 'ioer-denis-inaki' of https://github.com/elorrieta-errekamari-institutua/AppClase.git
 		switchMenu();
 
 	}// main
@@ -70,7 +74,7 @@ public class App {
 
 	private static boolean getUnAlumno(int idAl, String nombreAl) {
 		boolean encontrado = false;
-		String sql = "SELECT id_alumno, nombre FROM alumno;";
+		String sql = "SELECT id_alumno, nombre FROM alumno ;";
 
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
@@ -189,7 +193,7 @@ public class App {
 				pst.setInt(3, id);
 				int lineasEliminadas = pst.executeUpdate();
 				if (lineasEliminadas > 0)
-					System.out.println(" El alumno se a eliminado correctamente ");
+					System.out.println(" El alumno se a modificado correctamente ");
 				else
 					System.out.println("No se ha encontrado el alumno");
 
