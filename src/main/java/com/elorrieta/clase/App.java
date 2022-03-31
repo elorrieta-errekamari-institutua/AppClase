@@ -35,11 +35,10 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
+
 		login();
-=======
-		//login();
->>>>>>> branch 'ioer-denis-inaki' of https://github.com/elorrieta-errekamari-institutua/AppClase.git
+
+		// login();
 		switchMenu();
 
 	}// main
@@ -74,12 +73,12 @@ public class App {
 
 	private static boolean getUnAlumno(int idAl, String nombreAl) {
 		boolean encontrado = false;
-		String sql = "SELECT id_alumno, nombre FROM alumno ;";
+		String sql = "SELECT id_alumno, nombre FROM alumno WHERE id_alumno=?;";
 
-		try (Connection con = Conexion.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql);
-				ResultSet rs = pst.executeQuery();) {
+		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 
+			pst.setInt(1, idAl);
+			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				if (rs.getInt(1) == idAl && rs.getString(2).equalsIgnoreCase(nombreAl)) {
 					encontrado = true;
