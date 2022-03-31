@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * App para hacer un CRUD completo para la bbdd de clase.sql
@@ -14,7 +12,7 @@ import java.util.regex.Pattern;
  * @author infauraga
  *
  */
-public class App {
+public class App_prueba {
 
 	// variables globales para poder usar en todos los metodos de esta Clase
 	private static final int OPCION_LISTAR = 1;
@@ -25,14 +23,12 @@ public class App {
 
 	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
 	private static final String SQL_ELIMINARALUMNO = "delete from  clase.alumno where id_alumno = ? ;";
+
 	private static int opcion = 0; // opcion seleccionada por el usuario
 
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
-		// llamamos al metodo login para validar usuario y contraseña
-	Login.control(sc);
 
 		System.out.println("Comenzamos");
 		boolean flag = true;
@@ -47,14 +43,13 @@ public class App {
 				break;
 
 			case OPCION_INSERTAR:
-
 				insertar();
 				break;
 
 			case OPCION_ELIMINAR:
 				eliminar();
 				break;
-				
+
 			case OPCION_SALIR:
 				flag = false;
 				break;
@@ -70,64 +65,36 @@ public class App {
 	}// main
 
 	/**
-	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd, Cuando el
-	 * email esta repetido entra en un bucle y pide
+	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
 	 */
-
 	private static void insertar() {
 
-		boolean validarEmail = true;
-		String respuesta;
-		// crea un bucle con un booleano dentro
-		do {
-			try (Connection con = Conexion.getConnection();
-					PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
+		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
 
-			) {
-				System.out.println("");
-				
-				System.out.println("Introduce el nombre");
-				String nombre = sc.nextLine();
-//Introduce un email que sea valido
-				System.out.println("Introduce el email");
-				String email = sc.nextLine();
-				Pattern pattern = Pattern
-		                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-				
-				Matcher mather = pattern.matcher(email);
-				if(mather.find() == true) {
-					
-					validarEmail = true;
-					pst.setString(1, nombre);
-					pst.setString(2, email);
-					pst.executeUpdate();
+		) {
 
-					System.out.println("Alumno insertado");
-				
-				}else {
-					validarEmail = false;
-					System.out.println("EMAIL INTRODUCIDO NO VAALIDO");
-				}
-				
-			} catch (Exception e) {
-				// si el booleano es false sigue en el bucle y vuelve a pedir datos por pantalla
-				validarEmail = false;
+			System.out.println("Introduce el nombre");
+			String nombre = sc.nextLine();
 
-				System.out.println("ERROR, EMAIL YA REGISTRADO");
+			System.out.println("Introduce el gmail");
+			String email = sc.nextLine();
 
-			}
-		
-			
+			// TODO validar campos y capturar excepcion de email capturado
 
-		} while (validarEmail == false);
-	} // metodo
+			pst.setString(1, nombre);
+			pst.setString(2, email);
 
-// insertar
+			pst.executeUpdate();
+			System.out.println("Alumno insertado");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}// insertar
 
 	/**
-	 * Muestra todos los alumnos por pantalla y tambien el total de alumnos que hay
-	 * en la base de datos
+	 * Muestra todos los alumnos por pantalla
 	 */
 	private static void listar() {
 
@@ -135,7 +102,6 @@ public class App {
 
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
-
 				ResultSet rs = pst.executeQuery();
 
 		) {
@@ -152,39 +118,14 @@ public class App {
 
 			} // while
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// Muestra el total de alumnos insertados
-		String sql1 = "SELECT\r\n" + " count(nombre) total_alumno\r\n"
-				+ "FROM clase.alumno ORDER BY id_alumno DESC;\r\n" + "";
-
-		try (Connection con = Conexion.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql1);
-
-				ResultSet rs = pst.executeQuery();
-
-		) {
-
-			System.out.println("");
-			while (rs.next()) {
-
-				String total_alumno = rs.getString("total_alumno");
-
-				System.out.printf("TOTAL DE ALUMNOS : " + total_alumno);
-
-				System.out.println("");
-
-			} // while
+			System.out.println("---------------------- TOTAL X Alumnos -------------------");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}// listar
-	
-	
+
 	/**
 	 * eliminar un alumno: pregunta a quien se quiere eliminar por id y si existe lo
 	 * elimina, si no da error y vuelve a preguntar. Preguntar hasta que diga no
@@ -192,7 +133,7 @@ public class App {
 	private static void eliminar() {
 		String muestra = "SELECT id_alumno,nombre,email,pass\r\n" + "FROM alumno\r\n" + "WHERE id_alumno = ?;";
 		String respuesta;
-		String comprobacion = null;
+		String comprobacion;
 		boolean flateliminar = true;
 		boolean flag2 = true;
 
@@ -201,9 +142,7 @@ public class App {
 				PreparedStatement pst2 = con.prepareStatement(muestra); // hace un select para mostrar a quien borras
 		) {
 			do {
-				//TODO HAY UN BUG rarisimo donde a la 2º vuelta si le dice que no quieres seguir, sigue, pero solo en una condicion especifica
-				//TODO ¿como hacer si el usuario mete un espacio vacio?
-				//TODO evitar que pongan algo que no sea numero
+
 				System.out.println("Introduce el ID del alumno a eliminar ");
 				int idalumno = Integer.parseInt(sc.nextLine());
 
@@ -226,11 +165,10 @@ public class App {
 
 				} else {
 					System.out.println("no existe el alumno introducido\n");
-					flag2 = false;
+
 				} // else
-				
-				
-				while (flag2) {
+					/// asegurar si quieres eleliminar a este alumno
+				do {
 					System.out.println("¿quiere eliminar a este alumno?: si /no");
 					comprobacion = sc.nextLine();
 
@@ -240,9 +178,8 @@ public class App {
 						System.out.println("Por favor introduce SI o NO");
 					}
 
-				}
-				
-				
+				} while (flag2);
+
 				if ("si".equalsIgnoreCase(comprobacion)) {
 					int filasEliminadas = pst.executeUpdate();
 					System.out.printf("entro la orden\n %s alumnos ha sido eliminados \n\n", filasEliminadas);
@@ -251,6 +188,8 @@ public class App {
 					flateliminar = false;
 				}
 			
+				
+//TODO mostrar el alumno que equieres eliminar
 
 				// preguntar si quieree seguir
 				boolean flag = true;
@@ -283,7 +222,7 @@ public class App {
 			e.printStackTrace();
 		}
 
-	}//fianl de eliminar
+	}
 
 	/**
 	 * Pinta por pantalla el menu de la App y pide al usuario que seleccione una
@@ -292,7 +231,6 @@ public class App {
 	 * @return int opcion seleccionada por el usuario;
 	 */
 	private static int menu() {
-
 		int op = 0;
 		boolean error = false;
 
@@ -302,7 +240,7 @@ public class App {
 		System.out.println(" 1 - Listar Alumnos");
 		System.out.println(" 2 - Insertar Nuevo Alumno");
 		System.out.println(" 3 - sdasdasdasd");
-		System.out.println(" 4 - asdasdasdasd ");
+		System.out.println(" 4 - eliminar");
 		System.out.println("----------------------------------------------------");
 		System.out.println(" 0 - Salir");
 		System.out.println("----------------------------------------------------");
@@ -317,7 +255,7 @@ public class App {
 			} catch (Exception e) {
 				error = true;
 				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
-			
+				e.printStackTrace();
 			}
 		} while (error);
 		return op;
