@@ -12,7 +12,7 @@ public class Delete {
 
 		// creracion de las variables que necesitamos para recoger los datos
 		int id = 0;
-		boolean encontrado = false;
+		
 
 		// declarar la sentencia que queremos
 		String sql = "DELETE FROM alumno WHERE id_alumno = ?;";
