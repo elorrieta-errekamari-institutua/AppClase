@@ -1,6 +1,6 @@
 # GESTIÓN DE ALUMNOS
 
-Proyecto **JAVA** contra una Base de Datos **MySQL** para gestionar los alumnos mediante sentencias **CRUD** de SQL.
+Proyecto **JAVA** contra una Base de Datos **MySQL** para gestionar los alumnos mediante sentencias **DML** de SQL.
 
 
 ## Descripcion
@@ -27,11 +27,11 @@ Y salir del programa (opción 0)
 - Java 8
 - Maven 4.0.0
 
-## Montaje y ejecución
+## Montaje y conexión
 
 Al ser un proyecto JAVA contra una BBDD vamos a necesitar un programa de gestión de BBDD, en nuestro caso hemo utilizado **MySQL Workbench**.
 
-Un dato a tener en cuenta es tener bien el puerto de conexión con la BBDD, la conexion se especifica en la clase conexión.
+Un dato a tener en cuenta es tener bien **la url de conexión** con la BBDD, la conexion se especifica en la clase **com.elorrieta.clase.Conexión**
 
 ```
 	DriverManager.getConnection("jdbc:mysql://localhost:3306/clase?useSSL=false", "root", "root");
