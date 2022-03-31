@@ -59,3 +59,10 @@ A continuación se muestra una imagen con la composición de la tabla que utiliz
 La version actual del proyecto es la inicial, 1.0.0.
 
 
+## Iniciar programa
+
+Para iniciar el programa debemos ejecutar como una aplicacion java la clase **com.elorrieta.clase.App**.
+
+Es la clase donde se encuentra el main del programa. 
+
+Pra cerrar el programa tienes que pulsar 0 en el menú principal.
