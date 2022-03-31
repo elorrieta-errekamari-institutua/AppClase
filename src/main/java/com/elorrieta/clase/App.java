@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * App para hacer un CRUD completo para la bbdd de clase.sql
@@ -33,6 +35,9 @@ public class App {
 
 	public static void main(String[] args) {
 
+		// llamamos al metodo login para validar usuario y contraseña
+	Login.control(sc);
+
 		System.out.println("Comenzamos");
 		boolean flag = true;
 
@@ -46,6 +51,7 @@ public class App {
 				break;
 
 			case OPCION_INSERTAR:
+
 				insertar();
 				break;
 
@@ -72,36 +78,64 @@ public class App {
 	}// main
 
 	/**
-	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd
+	 * Pide por pantalla los datos de un alumno y lo inserta en la bbdd, Cuando el
+	 * email esta repetido entra en un bucle y pide
 	 */
+
 	private static void insertar() {
 
-		try (Connection con = Conexion.getConnection(); PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
+		boolean validarEmail = true;
+		String respuesta;
+		// crea un bucle con un booleano dentro
+		do {
+			try (Connection con = Conexion.getConnection();
+					PreparedStatement pst = con.prepareStatement(SQL_INSERTALUMNO);
 
-		) {
+			) {
+				System.out.println("");
+				
+				System.out.println("Introduce el nombre");
+				String nombre = sc.nextLine();
+//Introduce un email que sea valido
+				System.out.println("Introduce el email");
+				String email = sc.nextLine();
+				Pattern pattern = Pattern
+		                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+				
+				Matcher mather = pattern.matcher(email);
+				if(mather.find() == true) {
+					
+					validarEmail = true;
+					pst.setString(1, nombre);
+					pst.setString(2, email);
+					pst.executeUpdate();
 
-			System.out.println("Introduce el nombre");
-			String nombre = sc.nextLine();
+					System.out.println("Alumno insertado");
+				
+				}else {
+					validarEmail = false;
+					System.out.println("EMAIL INTRODUCIDO NO VAALIDO");
+				}
+				
+			} catch (Exception e) {
+				// si el booleano es false sigue en el bucle y vuelve a pedir datos por pantalla
+				validarEmail = false;
 
-			System.out.println("Introduce el gmail");
-			String email = sc.nextLine();
+				System.out.println("ERROR, EMAIL YA REGISTRADO");
 
-			// TODO validar campos y capturar excepcion de email capturado
+			}
+		
+			
 
-			pst.setString(1, nombre);
-			pst.setString(2, email);
+		} while (validarEmail == false);
+	} // metodo
 
-			pst.executeUpdate();
-			System.out.println("Alumno insertado");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}// insertar
+// insertar
 
 	/**
-	 * Muestra todos los alumnos por pantalla
+	 * Muestra todos los alumnos por pantalla y tambien el total de alumnos que hay
+	 * en la base de datos
 	 */
 	private static void listar() {
 
@@ -109,6 +143,7 @@ public class App {
 
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
+
 				ResultSet rs = pst.executeQuery();
 
 		) {
@@ -125,7 +160,31 @@ public class App {
 
 			} // while
 
-			System.out.println("---------------------- TOTAL X Alumnos -------------------");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Muestra el total de alumnos insertados
+		String sql1 = "SELECT\r\n" + " count(nombre) total_alumno\r\n"
+				+ "FROM clase.alumno ORDER BY id_alumno DESC;\r\n" + "";
+
+		try (Connection con = Conexion.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql1);
+
+				ResultSet rs = pst.executeQuery();
+
+		) {
+
+			System.out.println("");
+			while (rs.next()) {
+
+				String total_alumno = rs.getString("total_alumno");
+
+				System.out.printf("TOTAL DE ALUMNOS : " + total_alumno);
+
+				System.out.println("");
+
+			} // while
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -353,6 +412,7 @@ public class App {
 	 * @return int opcion seleccionada por el usuario;
 	 */
 	private static int menu() {
+
 		int op = 0;
 		boolean error = false;
 
@@ -377,7 +437,7 @@ public class App {
 			} catch (Exception e) {
 				error = true;
 				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
-				e.printStackTrace();
+			
 			}
 		} while (error);
 		return op;
