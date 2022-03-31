@@ -5,12 +5,17 @@ Proyecto **JAVA** contra una Base de Datos **MySQL** para gestionar los alumnos 
 
 ## Descripcion
 
-En primera instancia se debe introducir un usuario y una contraseña válida para poder acceder al menú principal. Si los credenciales son incorrectos se volverán a pedir.
+En primera instancia se debe introducir un usuario y una contraseña válida para poder acceder al menú principal. Si los credenciales son incorrectos se volverán a pedir y no dejara acceder.
+
+Para poder ejecutar el programa debemos loguearnos con el **[User: admin] [password: admin]**
+
 Una vez dentro, lo primero que se ve es un menú con 4 opciones más la opción de salir
 
 ![menú](screenshots/menu.PNG)
 
-El usuario podrá Listar los alumnos que estan registrados en la bbdd (opción 1)
+El usuario podrá: 
+
+Listar los alumnos que estan registrados en la bbdd (opción 1)
 
 Insertar un nuevo alumno con los campos nombre e email (opción 2)
 
@@ -37,7 +42,7 @@ Un dato a tener en cuenta es tener bien **la url de conexión** con la BBDD, la 
 	DriverManager.getConnection("jdbc:mysql://localhost:3306/clase?useSSL=false", "root", "root");
 ```
 
-Para poder ejecutar el programa debemos loguearnos con el **[User: admin] [password: admin]**
+
 
 ## Diagrama BBDD
 
