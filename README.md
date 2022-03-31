@@ -29,8 +29,15 @@ Y salir del programa (opcion 0)
 
 ## Montaje y ejecucion
 
-Lorem ipsum dolor sit amet consectetur, adipiscing elit vel vitae lacus tristique, sociis malesuada nec blandit. Molestie dui varius at pharetra id congue nibh, etiam taciti ut class interdum viverra neque, egestas nunc fermentum justo fringilla elementum. Etiam dapibus tristique nec justo rhoncus per lacus faucibus sapien arcu massa ridiculus, fermentum taciti mollis facilisi vehicula nam blandit varius euismod sed venenatis, habitant donec molestie netus potenti dis ut pellentesque risus auctor cursus
+Al ser un proyecto JAVA contra una BBDD vamos a necesitar un programa de gestion de BBDD, en nuestro caso hemo utilizado **MySQL Workbench**.
 
+Un dato a tener en cuenta es tener bien el puerto de conexión con la BBDD, la conexion se especifica en la clase conexion.
+
+```
+	DriverManager.getConnection("jdbc:mysql://localhost:3306/clase?useSSL=false", "root", "root");
+```
+
+Para poder ejecutar el programa debemos loguearnos con el **[User: admin] [password: admin]**
 
 ## Diagrama BBDD
 
