@@ -35,7 +35,7 @@ public class App {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		// login();
+		login();
 		switchMenu();
 
 	}// main
@@ -302,8 +302,8 @@ public class App {
 
 	/**
 	 */
-	public static String isGmail(Scanner sc) {
-		
+	public static String isGmail() {
+
 		Pattern pat = Pattern.compile("^([\\w]*[\\w\\.]*(?!\\.)@gmail.com)");
 		String dni = sc.nextLine();
 		Matcher mat = pat.matcher(dni);
@@ -318,7 +318,7 @@ public class App {
 	}
 
 	public static String isString() {
-		Scanner sc = new Scanner(System.in);
+
 		Pattern pat = Pattern.compile("[a-zA-Z ]{2,254}");
 		String dni = sc.nextLine();
 		Matcher mat = pat.matcher(dni);
@@ -369,23 +369,22 @@ public class App {
 		return op;
 	}// App
 
-public static int isNumberMenu() {
-	
-	Scanner sc = new Scanner(System.in);
-	System.out.println("Introduce la opcion deseada");
-	int opcion = 0;
-	try {
-		opcion = sc.nextInt();
-		if (!(1 <= opcion && opcion <= 4)) {
-			System.out.println("El numero introducido no estaba entre las opciones posibles ( |1||2||3||4| )");
+	public static int isNumberMenu() {
+
+		System.out.println("Introduce la opcion deseada");
+		int opcion = 0;
+		try {
+			opcion = sc.nextInt();
+			if (!(1 <= opcion && opcion <= 4)) {
+				System.out.println("El numero introducido no estaba entre las opciones posibles ( |1||2||3||4| )");
+				opcion = isNumberMenu();
+			}
+		} catch (InputMismatchException e) {
+			System.out.println();
+			System.out.println("No has introducido un numero");
+			System.out.println();
 			opcion = isNumberMenu();
 		}
-	} catch (InputMismatchException e) {
-		System.out.println();
-		System.out.println("No has introducido un numero");
-		System.out.println();
-		opcion = isNumberMenu();
-	}
-	return opcion;
+		return opcion;
 	}
 }
