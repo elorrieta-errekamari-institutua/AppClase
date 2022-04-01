@@ -25,7 +25,7 @@ public class App {
 
 	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
 	private static final String SQL_ELIMINARALUMNO = "delete from  clase.alumno where id_alumno = ? ;";
-	
+
 	private static final String SQL_SELECT = "SELECT id_alumno,nombre,email,pass " + "FROM alumno "
 			+ " WHERE id_alumno = ?;";
 	private static final String SQL_UPDATE = "UPDATE clase.alumno SET nombre = ?, email = ?, pass = ? WHERE id_alumno = ?;";
@@ -36,7 +36,7 @@ public class App {
 	public static void main(String[] args) {
 
 		// llamamos al metodo login para validar usuario y contraseña
-	//Login.control(sc);
+		// Login.control(sc);
 
 		System.out.println("Comenzamos");
 		boolean flag = true;
@@ -93,31 +93,30 @@ public class App {
 
 			) {
 				System.out.println("");
-				
+
 				System.out.println("Introduce el nombre");
 				String nombre = sc.nextLine();
 //Introduce un email que sea valido
 				System.out.println("Introduce el email");
 				String email = sc.nextLine();
-				Pattern pattern = Pattern
-		                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-				
+				Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
 				Matcher mather = pattern.matcher(email);
-				if(mather.find() == true) {
-					
+				if (mather.find() == true) {
+
 					validarEmail = true;
 					pst.setString(1, nombre);
 					pst.setString(2, email);
 					pst.executeUpdate();
 
 					System.out.println("Alumno insertado");
-				
-				}else {
+
+				} else {
 					validarEmail = false;
 					System.out.println("EMAIL INTRODUCIDO NO VAALIDO");
 				}
-				
+
 			} catch (Exception e) {
 				// si el booleano es false sigue en el bucle y vuelve a pedir datos por pantalla
 				validarEmail = false;
@@ -125,8 +124,6 @@ public class App {
 				System.out.println("ERROR, EMAIL YA REGISTRADO");
 
 			}
-		
-			
 
 		} while (validarEmail == false);
 	} // metodo
@@ -231,60 +228,94 @@ public class App {
 	private static void modificar() {
 		String respuesta;
 		String comprobacion = null;
-		boolean preguntar= true;
+		boolean preguntar = true;
 		boolean flag2 = true;
-		
-		
+
 		do {
-		try (Connection con = Conexion.getConnection();
-				PreparedStatement pstupdate = con.prepareStatement(SQL_UPDATE);
-				PreparedStatement pstselect = con.prepareStatement(SQL_SELECT);) {
+			try (Connection con = Conexion.getConnection();
+					PreparedStatement pstupdate = con.prepareStatement(SQL_UPDATE);
+					PreparedStatement pstselect = con.prepareStatement(SQL_SELECT);) {
 
-			System.out.println("Introduzca el id del alumno");
-			int idalumno = Integer.parseInt(sc.nextLine());
-			pstselect.setInt(1, idalumno);
-			ResultSet rs = pstselect.executeQuery();
-if(rs.next()) {
-	preguntar=false;
-	
-	System.out.println("----------------------------------------------------------");
-	System.out.println(" ID            nombre            email			contraseña");
-	System.out.println("----------------------------------------------------------");
+				System.out.println("Introduzca el id del alumno");
+				int idalumno = Integer.parseInt(sc.nextLine());
+				pstselect.setInt(1, idalumno);
+				ResultSet rs = pstselect.executeQuery();
+				if (rs.next()) {
+					preguntar = false;
 
-	int id = rs.getInt("id_alumno");
-	String nombre = rs.getString("nombre");
-	String email = rs.getString("email");
-	String pass = rs.getString("pass");
-	System.out.printf(" %-4s %-25s %-10s %s \n", id, nombre, email, pass);
+					System.out.println("----------------------------------------------------------");
+					System.out.println(" ID            nombre            email			contraseña");
+					System.out.println("----------------------------------------------------------");
 
-	
-} else {
-	System.out.println("---------------------------------");
-	System.out.println(" EL ALUMNO INTRODUCIDO NO EXISTE");
-	System.out.println("---------------------------------");
+					int id = rs.getInt("id_alumno");
+					String nombre = rs.getString("nombre");
+					String email = rs.getString("email");
 
-preguntar=true;
-	
-		
-}
-		}catch (Exception e) {
-			System.out.println("Error");
-		}
+					Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+							+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-		}while(preguntar);
-		do {
-			System.out.println("¿Quiere modificar a este alumno?: si /no");
-			comprobacion = sc.nextLine();
-			if("si".equalsIgnoreCase(comprobacion)) {
-				flag2 = false;
-				
-			}else if("no".equalsIgnoreCase(comprobacion)) {
-				flag2 = false;
-			}else {
-				System.out.println("Por favor introduce SI o NO");
+					Matcher mather = pattern.matcher(email);
+					String pass = rs.getString("pass");
+					System.out.printf(" %-4s %-25s %-10s %s \n", id, nombre, email, pass);
+
+				} else {
+					System.out.println("---------------------------------");
+					System.out.println(" EL ALUMNO INTRODUCIDO NO EXISTE");
+					System.out.println("---------------------------------");
+
+					preguntar = true;
+					if (preguntar) {
+
+						break;
+					}
+
+				}
+
+				do {
+					System.out.println("");
+					System.out.println("¿Quiere modificar a este alumno?: si /no");
+					comprobacion = sc.nextLine();
+
+					if ("si".equalsIgnoreCase(comprobacion)) {
+						flag2 = false;
+						System.out.println("cambia el nombre");
+						String uNombre = sc.nextLine();
+
+						System.out.println("cambia el email ");
+						String uEmail = sc.nextLine();
+
+						System.out.println("cambia la contraseña ");
+						String uPass = sc.nextLine();
+
+						pstupdate.setString(1, uNombre);
+						pstupdate.setString(2, uEmail);
+						pstupdate.setString(3, uPass);
+						pstupdate.setInt(4, idalumno);
+						int filaUpdate = pstupdate.executeUpdate();
+
+						int id = rs.getInt("id_alumno");
+						String nombre = rs.getString("nombre");
+						String email = rs.getString("email");
+						String pass = rs.getString("pass");
+						System.out.println("ALUMNO MODIFICADO");
+
+					} else if ("no".equalsIgnoreCase(comprobacion)) {
+						flag2 = false;
+
+					} else {
+						System.out.println("Por favor introduce SI o NO");
+						flag2 = true;
+
+					}
+
+				} while (flag2);
+
+			} catch (Exception e) {
+				System.out.println("Error");
 			}
-			
-		}while(flag2);
+
+		} while (preguntar);
+
 	}// end modificar
 
 	/**
@@ -334,17 +365,20 @@ preguntar=true;
 					System.out.println("\n¿quiere eliminar a este alumno?: si /no");
 					comprobacion = sc.nextLine();
 
-					if ("si".equalsIgnoreCase(comprobacion) || "no".equalsIgnoreCase(comprobacion)) {
+					if ("si".equalsIgnoreCase(comprobacion)) {
 						flag2 = false;
+					} else if ("no".equalsIgnoreCase(comprobacion)) {
+						flag2 = false;
+
 					} else {
 						System.out.println("Por favor introduce SI o NO");
-					}
 
+					}
 				} /// whille
 
 				if ("si".equalsIgnoreCase(comprobacion)) {
 					int filasEliminadas = pst.executeUpdate();
-					System.out.printf("entro la orden\n %s alumnos ha sido eliminados \n\n", filasEliminadas);
+					System.out.printf(" %s alumnos ha sido eliminados \n\n", filasEliminadas);
 
 				} else if ("no".equalsIgnoreCase(comprobacion)) {
 					flateliminar = false;
@@ -415,7 +449,7 @@ preguntar=true;
 			} catch (Exception e) {
 				error = true;
 				System.out.println("Error en la introduccion de opcion, vuelve a introducir la opcion");
-			
+
 			}
 		} while (error);
 		return op;
