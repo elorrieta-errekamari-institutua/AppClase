@@ -24,16 +24,17 @@ public class Update {
 
 		) {
 
-			System.out.println("Introduce la id del alumno que deseas modificar");
+			//System.out.println("Introduce la id del alumno que deseas modificar");
 			//gestion de error si mete letras en vez de numeros
 			boolean volverApedir = true;
 			while (volverApedir) {
+				System.out.println("Introduce la id del alumno que deseas modificar");
 				try {
 					id = Integer.parseInt(sc.nextLine());
 					volverApedir = false;
 				} catch (Exception e) {
 					System.out.println("Debes introducir una id de un alumno existente, intentalo de nuevo");
-					System.out.println("Introduce la id del alumno que deseas modificar");
+					//System.out.println("Introduce la id del alumno que deseas modificar");
 				}
 			}
 			//sentencia para preguntar si la id introducida existe en la bbdd
