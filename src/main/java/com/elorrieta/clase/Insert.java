@@ -15,20 +15,59 @@ public class Insert {
 	public void insertar(Scanner sc) {
 		boolean encontrado = false;
 
+		String nombre = "";
+		String email = "";
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pst = con.prepareStatement("INSERT INTO alumno (nombre, email) VALUES (?,?)");
 
 		) {
 
-			System.out.println("Introduce el nombre");
-			String nombre = sc.nextLine();
+			// nombre vacio
+			boolean nombreVacio = true;
 
-			System.out.println("Introduce el gmail");
-			String email = sc.nextLine().trim();
+			do {
 
+				System.out.println("Introduce el nombre");
+				nombre = sc.nextLine().trim();
+
+				if ("".equalsIgnoreCase(nombre) || nombre.length() > 45) {
+
+					System.out.println("El nombre no puede estar vacio o superar 45 caracteres");
+				}
+
+				else {
+
+					pst.setString(1, nombre);
+					nombreVacio = false;
+				}
+
+			} while (nombreVacio);
+
+			// email vacio
+			boolean emailVacio = true;
+
+			do {
+
+				System.out.println("Introduce el email");
+				email = sc.nextLine().trim();
+
+				if ("".equalsIgnoreCase(email) || email.length() > 45) {
+
+					System.out.println("El email no puede estar vacio o superar 45 caracteres");
+				}
+
+				else {
+
+					pst.setString(2, email);
+					emailVacio = false;
+				}
+
+			} while (emailVacio);
+
+			//si el email ya existe
 			encontrado = new Select().buscarEmail(email);
 			if (encontrado) {
-				System.out.println("El email del alumno ya se encuentra en la BBDD");
+				System.out.println("El email del alumno ya se encuentra en la BBDD. Volvemos al menu");
 			} else {
 				pst.setString(1, nombre);
 				pst.setString(2, email);

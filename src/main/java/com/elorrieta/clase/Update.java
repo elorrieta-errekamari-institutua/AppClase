@@ -50,14 +50,14 @@ public class Update {
 					String emailViejo =  rs2.getString("email");
 				
 				
-					System.out.println("El nombre actual es : " + nombreViejo);
+					System.out.println("El nombre actual es : " + nombreViejo.toUpperCase() + " ,pulsa enter para no cambiarlo");
 		            System.out.println("Introduce un nuevo nombre");
 		            nombreNuevo = sc.nextLine();
 		            if ( "".equalsIgnoreCase(nombreNuevo)) {
 		            	nombreNuevo = nombreViejo;
 		            }
 	
-					System.out.println("El email actual es : " + emailViejo);
+					System.out.println("El email actual es : " + emailViejo.toUpperCase() + " ,pulsa enter para no cambiarlo");
 					System.out.println("Introduce un email");
 					emailNuevo = sc.nextLine();
 					 if ( "".equalsIgnoreCase(emailNuevo)) {

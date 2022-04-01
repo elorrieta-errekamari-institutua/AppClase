@@ -21,6 +21,7 @@ public class Delete {
 
 		) {
 
+			// si mete letras en vez de numeros
 			boolean volverApedir = true;
 			while (volverApedir) {
 				System.out.println("Introduce la id del alumno que deseas eliminar");
