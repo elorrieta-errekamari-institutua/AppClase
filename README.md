@@ -18,6 +18,22 @@ la base de datos de clase es solo una tabla con cuatro columnas:
 - email
 - contraseña
 
-![pantallazo menu de la App](C:\Users\jaele\Pictures\clase.png)
+![pantallazo menu de la App](pantallazos/clase.png)
+
+## funcionamiento
+
+La funcion muestra una lista de opciones del 1 al 4 siendo:
+
+- LISTAR = 1
+- INSERTAR = 2
+- MODIFICAR = 3
+- ELIMINAR = 4
+- SALIR = 0
+
+###Listar:
+###Insertar:
+###Modificar:
+###Eliminar:
+###Salir:
 
 
