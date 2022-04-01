@@ -38,7 +38,7 @@ public class Insert {
 			}
 
 		} catch (SQLException sqle) {
-			System.out.println("Este email ya esta registrado, Vamos al menu.\n");
+			System.out.println("Este email ya esta registrado, Volvemos al menu.\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

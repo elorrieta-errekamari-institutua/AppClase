@@ -22,7 +22,6 @@ public class Update {
 
 		) {
 
-			
 			//gestion de error si mete letras en vez de numeros
 			boolean volverApedir = true;
 			while (volverApedir) {

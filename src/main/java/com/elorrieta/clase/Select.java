@@ -49,7 +49,7 @@ public class Select {
 	 */
 	public boolean buscarId(int id) {
 
-		int i = 0;
+		
 		boolean encontrado = false;
 		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno ASC;";
 
@@ -85,7 +85,7 @@ public class Select {
 	 */
 	public boolean buscarEmail(String email) {
 
-		int i = 0;
+		
 		boolean encontrado = false;
 		String sql = "SELECT id_alumno, nombre, email FROM clase.alumno ORDER BY id_alumno ASC;";
 

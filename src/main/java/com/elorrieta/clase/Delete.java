@@ -12,8 +12,7 @@ public class Delete {
 
 		// creracion de las variables que necesitamos para recoger los datos
 		int id = 0;
-		boolean encontrado = false;
-
+		
 		// declarar la sentencia que queremos
 		String sql = "DELETE FROM alumno WHERE id_alumno = ?;";
 
@@ -30,7 +29,6 @@ public class Delete {
 					volverApedir = false;
 				} catch (Exception e) {
 					System.out.println("Debes introducir una id de un alumno existente, intentalo de nuevo");
-					System.out.println("Introduce la id del alumno que deseas eliminar");
 					volverApedir = true;
 				}
 			}
@@ -46,7 +44,7 @@ public class Delete {
 				pst.executeUpdate();
 				System.out.println("Alumno eliminado correctamente\n");
 			} else {
-				System.out.println("La id seleccionada no se encuentra en la BBDD\n");
+				System.out.println("No exite ningun alumno registrado con la id " + id + ", volvemos al menu\n");
 			}
 
 		} catch (SQLException sqle) {
