@@ -18,6 +18,6 @@ la base de datos de clase es solo una tabla con cuatro columnas:
 - email
 - contraseña
 
-!(/imagen/clase.PNG)
+![pantallazo menu de la App](/Imágenes/clase.PNG)
 
 
