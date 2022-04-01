@@ -25,7 +25,7 @@ public class App {
 
 	private static final String SQL_INSERTALUMNO = "INSERT INTO alumno (nombre, email) VALUES (?,?)";
 	private static final String SQL_ELIMINARALUMNO = "delete from  clase.alumno where id_alumno = ? ;";
-	// TODO PONER LOS ? EN SU SITIO
+	
 	private static final String SQL_SELECT = "SELECT id_alumno,nombre,email,pass " + "FROM alumno "
 			+ " WHERE id_alumno = ?;";
 	private static final String SQL_UPDATE = "UPDATE clase.alumno SET nombre = ?, email = ?, pass = ? WHERE id_alumno = ?;";
@@ -36,7 +36,7 @@ public class App {
 	public static void main(String[] args) {
 
 		// llamamos al metodo login para validar usuario y contraseña
-	Login.control(sc);
+	//Login.control(sc);
 
 		System.out.println("Comenzamos");
 		boolean flag = true;
@@ -231,82 +231,60 @@ public class App {
 	private static void modificar() {
 		String respuesta;
 		String comprobacion = null;
-		boolean flateliminar = true;
+		boolean preguntar= true;
 		boolean flag2 = true;
 		
+		
+		do {
 		try (Connection con = Conexion.getConnection();
 				PreparedStatement pstupdate = con.prepareStatement(SQL_UPDATE);
 				PreparedStatement pstselect = con.prepareStatement(SQL_SELECT);) {
 
-			System.out.println("introducazca id alumno");
+			System.out.println("Introduzca el id del alumno");
 			int idalumno = Integer.parseInt(sc.nextLine());
-
 			pstselect.setInt(1, idalumno);
 			ResultSet rs = pstselect.executeQuery();
+if(rs.next()) {
+	preguntar=false;
+	
+	System.out.println("----------------------------------------------------------");
+	System.out.println(" ID            nombre            email			contraseña");
+	System.out.println("----------------------------------------------------------");
 
-			// TODO preguntar
-			if (rs.next()) {
+	int id = rs.getInt("id_alumno");
+	String nombre = rs.getString("nombre");
+	String email = rs.getString("email");
+	String pass = rs.getString("pass");
+	System.out.printf(" %-4s %-25s %-10s %s \n", id, nombre, email, pass);
 
-				System.out.println("-------------------------------------------------------");
-				System.out.println(" ID            nombre            email			contraseña");
-				System.out.println("-------------------------------------------------------");
+	
+} else {
+	System.out.println("---------------------------------");
+	System.out.println(" EL ALUMNO INTRODUCIDO NO EXISTE");
+	System.out.println("---------------------------------");
 
-				int id = rs.getInt("id_alumno");
-				String nombre = rs.getString("nombre");
-				String email = rs.getString("email");
-				String pass = rs.getString("pass");
-				System.out.printf(" %-4s %-25s %-10s %s \n", id, nombre, email, pass);
+preguntar=true;
+	
+		
+}
+		}catch (Exception e) {
+			System.out.println("Error");
+		}
 
-			} else {
-				System.out.println("no existe el alumno introducido\n");
+		}while(preguntar);
+		do {
+			System.out.println("¿Quiere modificar a este alumno?: si /no");
+			comprobacion = sc.nextLine();
+			if("si".equalsIgnoreCase(comprobacion)) {
 				flag2 = false;
-			} // else
-
-			while (flag2) {
-				System.out.println("¿quiere modificar a este alumno?: si /no");
-				comprobacion = sc.nextLine();
-
-				if ("si".equalsIgnoreCase(comprobacion) || "no".equalsIgnoreCase(comprobacion)) {
-					flag2 = false;
-				} else {
-					System.out.println("Por favor introduce SI o NO");
-				}
-
-			} /// whille
-			System.out.println("cambia el nombre");
-			String uNombre = sc.nextLine();
-
-			System.out.println("cambia el email ");
-			String uEmail = sc.nextLine();
-
-			System.out.println("cambia la contraseña ");
-			String uPass = sc.nextLine();
-
-			pstupdate.setString(1, uNombre);
-			pstupdate.setString(2, uEmail);
-			pstupdate.setString(3, uPass);
-			pstupdate.setInt(4, idalumno);
-
-			int filaUpdate = pstupdate.executeUpdate();
-			
-			if (rs.last()) {
-
-				System.out.println("-------------------------------------------------------");
-				System.out.println(" ID            nombre            email			contraseña");
-				System.out.println("-------------------------------------------------------");
-
-				int id = rs.getInt("id_alumno");
-				String nombre = rs.getString("nombre");
-				String email = rs.getString("email");
-				String pass = rs.getString("pass");
-				System.out.printf(" %-4s %-25s %-10s %s \n", id, nombre, email, pass);
-
+				
+			}else if("no".equalsIgnoreCase(comprobacion)) {
+				flag2 = false;
+			}else {
+				System.out.println("Por favor introduce SI o NO");
 			}
-
-		} catch (Exception e) {
-			System.out.println("error");
-			e.printStackTrace();
-		} // catch
+			
+		}while(flag2);
 	}// end modificar
 
 	/**
