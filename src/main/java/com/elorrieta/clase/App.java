@@ -1,6 +1,6 @@
 package com.elorrieta.clase;
 
-// FIX 1
+// commit en master_merge_2
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
