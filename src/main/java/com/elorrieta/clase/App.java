@@ -105,7 +105,7 @@ public class App {
 	public static void main(String[] args) {
 		int opcion = 0;
 
-		//logueo();
+		logueo();
 
 		do {
 			opcion = menu();
