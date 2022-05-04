@@ -10,7 +10,7 @@ Con este programa se podran hacer hasta 4 acciones:
 
 4. Eliminar. 
 
-![pantallazo menu de la App](screenshots/screenshot.png)
+![pantallazo menu de la App](screenshot/screenshot.png)
 
 
 ## Listar Alumnos
@@ -42,7 +42,7 @@ dentro de dicho sql tendra el codigo necesario para la creacion de la base de da
 solo tendra que copiar el codigo y introducirlo dentro de Worbench, una vez echo tendra
 que darle al simbolo del rayo para crearlo, es entonces cuando debera iniciar el programa.
 
-![pantallazo de SQL_DO](screenshots/SQL_DO.png)
-![pantallazo de el codigo](screenshots/codigo.png)
-![pantallazo de el worbench](screenshots/worbench.png)
-![pantallazo de la base de datos](screenshots/BBDD.png)
+![pantallazo de SQL_DO](screenshot/SQL_DO.png)
+![pantallazo de el codigo](screenshot/codigo.png)
+![pantallazo de el worbench](screenshot/worbench.png)
+![pantallazo de la base de datos](screenshot/BBDD.png)
