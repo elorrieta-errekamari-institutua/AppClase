@@ -10,6 +10,7 @@ Con este programa se podran hacer hasta 4 acciones:
 
 4. Eliminar. 
 
+
 ![pantallazo menu de la App](screenshot/screenshot.png)
 
 
