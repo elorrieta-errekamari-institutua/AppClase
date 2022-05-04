@@ -2,7 +2,7 @@
 
 Lorem **negrita** sit *italica*, consectetur adipiscing elit. In mattis nisi nec tristique elementum. Phasellus eget elit et nibh vulputate consectetur eget ut tortor. Cras id convallis massa. Donec et pulvinar orci, nec elementum nisi. Nunc tincidunt diam vel felis vehicula, a iaculis enim lobortis. 
 
-![pantallazo menu de la App](/screenshots/menu.PNG)  <h1>[ruta exacta]</h1>
+![pantallazo menu de la App](screenshots/menu.PNG)  <h1>[ruta exacta]</h1>
 
 
 Ejemplo de enlace [pulsa](https://tutorialmarkdown.com/sintaxis)
