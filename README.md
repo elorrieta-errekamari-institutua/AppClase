@@ -1,47 +1,48 @@
-# Titulo principal H1
+# Bienvenido al programa de gestion de clase!
 
-Lorem **negrita** sit *italica*, consectetur adipiscing elit. In mattis nisi nec tristique elementum. Phasellus eget elit et nibh vulputate consectetur eget ut tortor. Cras id convallis massa. Donec et pulvinar orci, nec elementum nisi. Nunc tincidunt diam vel felis vehicula, a iaculis enim lobortis. 
+Con este programa se podran hacer hasta 4 acciones:
 
-![pantallazo menu de la App](screenshots/menu.PNG)  <h1>[ruta exacta]</h1>
+1. Listar Alumnos.
 
+2. Insertar nuevo Alumno.
 
-Ejemplo de enlace [pulsa](https://tutorialmarkdown.com/sintaxis)
+3. Modificar.
 
+4. Eliminar. 
 
-## seccion1 == h2
-
-Ejemplo de lista desordenada
-
-- item1
-- item2
-- item 3
-
-## seccion2 == h2
-
-Lorem ipsum dolor sit amet
+![pantallazo menu de la App](screenshots/screenshot.png)
 
 
+## Listar Alumnos
 
-### ejemplo de codigo
+Con esta opcion podemos listar todos los alumnos cos sus
+ID, nombre y email.
 
+## Insertar nuevo Alumno
 
-```
-		variables globales para poder usar en todos los metodos de esta Clase
-		private static final int OPCION_LISTAR = 1;
-		private static final int OPCION_INSERTAR = 2;
-		private static final int OPCION_MODIFICAR = 3;
-```
+Con esta opcion podremos ingresar un nuevo
+alumno al sistema introduciendo su Id, nombre y email.
 
+## Modificar
 
+Con esta opcion, introduciendo el ID del alumno que
+queremos modificar se podra cambiar el nombre
+y el email asociados.
 
-<h1>DESCRIPCION</h1>
+## Eliminar
 
-<h1>MONTAJE Y EJECUCICION</h1>
+Con la opcion eliminar, introduciendo el ID
+del alumno se podra eliminar de la base de datos.
 
-<h1>TECNOLOGIA QUE SE HA USADO</h1>
+### Como usar la Base de Datos
 
-<h1>DIAGARAMA BBDD Y CLASES </h1>
+Lo primero, debe tener instalado Worbench o una variante para el uso de MySQL,
+despues debe ir al sql llamado SQL_DO el cual se encuentra dentro del programa
+dentro de dicho sql tendra el codigo necesario para la creacion de la base de datos,
+solo tendra que copiar el codigo y introducirlo dentro de Worbench, una vez echo tendra
+que darle al simbolo del rayo para crearlo, es entonces cuando debera iniciar el programa.
 
-
-<h1>FOTOS Y DEMAS</h1>
-<h1>VERSIONES</h1>
+![pantallazo de SQL_DO](screenshots/SQL_DO.png)
+![pantallazo de el codigo](screenshots/codigo.png)
+![pantallazo de el worbench](screenshots/worbench.png)
+![pantallazo de la base de datos](screenshots/BBDD.png)
